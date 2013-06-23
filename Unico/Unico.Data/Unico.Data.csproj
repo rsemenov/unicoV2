@@ -48,10 +48,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataConfiguration.cs" />
     <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\Department.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Brand.cs" />
+    <Compile Include="Enum\ProductAvailability.cs" />
     <Compile Include="Interfaces\IEntity.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Mappings\DepartmentMap.cs" />
+    <Compile Include="Mappings\CategoryMap.cs" />
     <Compile Include="Mappings\ProductMap.cs" />
+    <Compile Include="Mappings\BrandMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

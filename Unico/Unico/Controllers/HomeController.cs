@@ -10,18 +10,21 @@ namespace Unico.Controllers
 {
     public class HomeController : Controller
     {
-        public IRepository<Product> ProductRepository { get; set; }
+        public IRepository<Department> DepartmentRepository { get; set; }
+        public IRepository<Category> CategoriesRepository { get; set; }
 
-        public HomeController()
-        {
-        }
-
+        
         public ActionResult Index()
         {
             ViewBag.Message = "Измените этот шаблон, чтобы быстро приступить к работе над приложением ASP.NET MVC.";
 
-            var p = new Product() { ExternalId = Guid.NewGuid(), Name = "Test 1" };
-            ProductRepository.Add(p);
+            //var d = new Department() { Name = "Test", Description = "dfsdfs" };
+            //DepartmentRepository.Add(d);
+
+            var dep = DepartmentRepository.FindAll();
+            var c = dep[0].Categories[0];
+            //CategoriesRepository.Add(c);
+
 
             return View();
         }

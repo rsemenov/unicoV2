@@ -1,66 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using NHibernate;
 
 namespace Unico.Data.Interfaces
 {
-    public interface IRepository<in T> where T : IEntity
+    public interface IRepository<T> where T : IEntity
     {
-        ISessionFactory SessionFactory { get; set; }
+        ISession Session { get; set; }
 
-        void Add(T entity);
-        void Update(T entity);
-        IList<T> GetAllItems<T>();
+        IList<T> FindAll();
+        T Find(Expression<Func<T, bool>> criteria);
+        IList<T> FindAll(Expression<Func<T, bool>> criteria);
+        void SaveOrUpdateAll(params T[] entities);
+        void Delete(T entity);
     }
 
-    public class Repository<T> : IRepository<T> where T : IEntity
+    public class Repository<T> : IRepository<T> where T : class, IEntity
     {
-        #region IRepository<T> Members
+        public ISession Session { get; set; }
 
-        public ISessionFactory SessionFactory { get; set; }
-
-        public void Add(T entity)
+        public IQueryOver<T, T> QueryOver()
         {
-            using (var session = SessionFactory.OpenSession())
-            {
-                using (var transaction = session.BeginTransaction())
-                {
-                    session.Save(entity);
-                    transaction.Commit();
-                }
-            }
-
+            return Session.QueryOver<T>();
         }
 
-        public void Update(T entity)
+        public T Find(Expression<Func<T, bool>> criteria)
         {
-            using (var session = SessionFactory.OpenSession())
-            {
-                using (var transaction = session.BeginTransaction())
-                {
-                    session.Update(entity);
-                    transaction.Commit();
-                }
-            }
-
+            return Session
+                .QueryOver<T>()
+                .Where(criteria)
+                .SingleOrDefault();
         }
 
-        public IList<T> GetAllItems<T>()
+        public IList<T> FindAll()
         {
-            using (var session = SessionFactory.OpenSession())
+            return Session
+                .CreateCriteria<T>()
+                .List<T>();
+        }
+
+        public IList<T> FindAll(Expression<Func<T, bool>> criteria)
+        {
+            return Session
+                .QueryOver<T>()
+                .Where(criteria)
+                .List();
+        }
+
+        public void SaveOrUpdateAll(params T[] entities)
+        {
+            foreach (var item in entities)
             {
-                using (var transaction = session.BeginTransaction())
-                {
-                    var res = session.CreateCriteria(typeof(T)).List<T>();
-                    transaction.Commit();
-                    return res;
-                }
+                Session.SaveOrUpdate(item);
             }
         }
 
-        #endregion
+        public void Delete(T entity)
+        {
+            Session.Delete(entity);
+        }
     }
 }

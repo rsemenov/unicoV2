@@ -8,9 +8,12 @@ using Autofac.Integration.Mvc;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
+using NHibernate.Context;
 using NHibernate.Dialect;
 using NHibernate.Tool.hbm2ddl;
 using Unico.Data.Interfaces;
+using Unico.Modules;
+using Unico.Modules.RequestFilters;
 
 namespace Unico.Configuration
 {
@@ -22,13 +25,16 @@ namespace Unico.Configuration
 
             var sessionFactory = GetSessionFactory();
 
-            builder.RegisterInstance<ISessionFactory>(sessionFactory);
-            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>))
-                .WithProperty("SessionFactory", sessionFactory).InstancePerDependency();
+            NHibernateSessionModule.InitSessionFactory(sessionFactory, GetRequestFilter());
+            
+            builder.RegisterInstance<ISessionFactory>(sessionFactory).SingleInstance();
+            builder.Register(x => x.Resolve<ISessionFactory>().OpenSession()).InstancePerHttpRequest();
+
+            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).PropertiesAutowired();
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
 
-            var container = builder.Build();
+            var container = builder.Build();            
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
 
@@ -40,8 +46,14 @@ namespace Unico.Configuration
                              .ShowSql())
                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<IEntity>())
                .ExposeConfiguration((config) => { new SchemaUpdate(config); })
+               .CurrentSessionContext<WebSessionContext>()
                .BuildSessionFactory();
             return sessionFactory;
+        }
+
+        private static IRequestFilter GetRequestFilter()
+        {
+            return new ServiceRequestFilter(new[] { ".*/Content/.*", ".*/Scripts/.*", ".*/Images/.*" });
         }
     }
 }

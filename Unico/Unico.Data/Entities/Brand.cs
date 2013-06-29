@@ -12,5 +12,6 @@ namespace Unico.Data.Entities
         public virtual int BrandId { get; set; }
         public virtual string Name { get; set; }
         public virtual string Info { get; set; }
+        public virtual IList<Product> Products { get; set; }
     }
 }

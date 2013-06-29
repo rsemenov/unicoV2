@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\DisplayAttribute.cs" />
     <Compile Include="DataConfiguration.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Department.cs" />

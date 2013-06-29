@@ -1,49 +1,71 @@
 ﻿<!DOCTYPE html>
 <html lang="ru">
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta charset="utf-8" />
-        <title>@ViewBag.Title — приложение ASP.NET MVC</title>
+        <title>@ViewBag.Title — Юниверсал комерс</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
+        @Styles.Render("~/Content/Site.css")
+        @Scripts.Render("~/Scripts/csshorizontalmenu.js")
+        
     </head>
     <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("ваша эмблема здесь", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
+        <div id="wrapper">
+            <div id="header-wrapper">
+	            <div id="logo" class="logo-wrapper">
+		            <h1><a href="#">Universal Commerse</a></h1>
+		            <p>Только качественная печать</p>
+	            </div>
+                <div class="functions-wrapper">
                     <section id="login">
                         @Html.Partial("_LoginPartial")
                     </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                            <li>@Html.ActionLink("О программе", "About", "Home")</li>
-                            <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
-        </header>
-        <div id="body">
+            <div class="horizontalcssmenu">
+		        <div  class="container">
+			        @Html.Action("_Menu", "Home")
+		        </div>
+	        </div>
+        </div>
+        <div id="page" class="container">
             @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
+            <section>
                 @RenderBody()
             </section>
         </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year — приложение ASP.NET MVC</p>
-                </div>
-            </div>
-        </footer>
 
-        @Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)
+   <div id="footer-bg">
+	 <div id="footer-content" class="container">
+		<div id="column1">
+			<h2>Контакты</h2>
+			<ul class="list-style2">
+				<li class="first">г. Сумы, ул. Шевченко 5,</li>
+				<li>тел: (0542)79-38-15, (067)230-78-36</li>
+			</ul>
+		</div>
+		<div id="column2">
+			<h2>Оформление заказа и доставка</h2>
+			Для уточнения и оформления заказа звоните по телефону (0542)79-38-15, 067-2307836
+		</div>
+		<div id="column3">
+			<h2>Наши клиенты</h2>
+			<ul class="list-style2">
+				<li class="first">Дельта банк</li>
+				<li>Банк универсальный</li>
+				<li>Платинум банк</li>
+				<li>Страховая компания ПЗУ</li>
+				<li>Страховая компания Оранта</li>
+				<li>Страховая компания Країна</li>
+			</ul>
+		</div>
+	  </div>
+    </div>
+    <div id="footer">
+	    <p>© 2007-2013 ТОВ "Юниверсал Комерс"</p>
+    </div>
+                    
+        
     </body>
 </html>

@@ -18,6 +18,9 @@ namespace Unico.Data.Mappings
             Id(x => x.BrandId);
             Map(x => x.Info);
             Map(x => x.Name);
+
+            HasMany<Product>(x => x.Products).KeyColumn("BrandId");
+
         }
     }
 }

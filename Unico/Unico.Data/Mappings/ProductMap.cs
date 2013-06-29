@@ -24,7 +24,8 @@ namespace Unico.Data.Mappings
             Map(x => x.Cartridge).Nullable();
 
             References<Category>(x => x.Category, "CategoryId");
-            References<Brand>(x => x.Brand, "BrandId");
+
+            References<Brand>(x => x.Brand, "Brand").Cascade.All();
         }
     }
 }

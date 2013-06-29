@@ -15,18 +15,14 @@ namespace Unico.Controllers
 
         
         public ActionResult Index()
+        {            
+            return View();        
+        }
+
+        public ActionResult _Menu()
         {
-            ViewBag.Message = "Измените этот шаблон, чтобы быстро приступить к работе над приложением ASP.NET MVC.";
-
-            //var d = new Department() { Name = "Test", Description = "dfsdfs" };
-            //DepartmentRepository.Add(d);
-
-            var dep = DepartmentRepository.FindAll();
-            var c = dep[0].Categories[0];
-            //CategoriesRepository.Add(c);
-
-
-            return View();
+            var departments = DepartmentRepository.FindAll();
+            return PartialView(departments);
         }
 
         public ActionResult About()

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Unico.Data.Entities.Department>
+
+<ul id="cssmenu1">
+	<li>@Html.ActionLink("Главная", "Index", "Home")</li>
+    @foreach (var dep in Model)
+    {        
+	    <li><a href="#">@dep.Name</a>
+        @if (dep.Categories.Count > 0)
+        {
+            <ul>                           
+            @foreach (var cat in dep.Categories)
+            {
+	            <li>@Html.ActionLink(cat.Name, "Show", "Category", new { categoryId = cat.CategoryId }, null)</li>
+            }
+            </ul>
+        }
+        </li>
+    }
+	<li>@Html.ActionLink("О нас", "About", "Home")</li>
+	<li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+</ul>

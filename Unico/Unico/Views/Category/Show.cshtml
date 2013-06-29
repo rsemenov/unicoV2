@@ -1,0 +1,42 @@
+﻿@using Unico.Data.Enum
+
+@model Unico.Data.Entities.Category
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<h3>@Model.Name</h3>
+<br />
+<table id="category-table">
+    <thead>
+        <tr>
+            <th>Наименование</th>
+            <th>Бренд</th>
+            <th>Описание</th>
+            <th>Картридж</th>
+            <th>Наличие</th>
+            <th>Цена в грн</th>
+        </tr>
+    </thead>
+    @for (int i = 0; i < Model.Products.Count; i++ )
+    {
+        var p = Model.Products[i];
+        if (i % 2 == 0)
+        {
+            @:<tr>            
+        }
+        else
+        {
+            @:<tr class="category-table-row-odd">
+        }
+            <td>@Html.Label("name", p.Name)</td>
+            <td>@Html.Label("brand", p.Brand.Name)</td>
+            <td>@Html.Label("desc", p.Description)</td>
+            <td>@Html.Label("cartridge", p.Cartridge)</td>
+            <td>@Html.Label("availability", p.Availability.ConvertToString())</td>
+            <td>@Html.Label("price", p.Price.ToString("F"))</td>
+        @:</tr>
+    }
+</table>
+

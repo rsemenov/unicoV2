@@ -55,6 +55,32 @@ CREATE TABLE [Brands](
 ) ON [PRIMARY]
 
 
+GO
 
+CREATE TABLE [Orders](	
+	[OrderId] [int] IDENTITY(1,1) NOT NULL,
+	[ExternalId] [uniqueidentifier] NOT NULL,
+	[AccountId] [uniqueidentifier] NOT NULL,
+	[CreatedOn] datetime NOT NULL
+ CONSTRAINT [PK_Orders] PRIMARY KEY CLUSTERED 
+(
+	[OrderId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
+GO
+
+CREATE TABLE [ProductOrders](
+	[ProductOrderId] [int] IDENTITY(1,1) NOT NULL,
+	[OrderId] [uniqueidentifier] NOT NULL,
+	[ProductId] [uniqueidentifier] NOT NULL,
+	[Count] [int] NOT NULL,
+	[WorkType] [int] NOT NULL,
+	[Status] [int] NOT NULL,
+	[LastStatusUpdate] datetime NOT NULL
+ CONSTRAINT [PK_ProductOrders] PRIMARY KEY CLUSTERED 
+(
+	[ProductOrderId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
 

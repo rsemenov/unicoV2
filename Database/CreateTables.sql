@@ -81,6 +81,7 @@ CREATE TABLE [ProductOrders](
 	[Count] [int] NOT NULL,
 	[Price] decimal(10,2) NOT NULL, --?????
 	[WorkType] [int] NOT NULL,
+	[Notes] [nvarchar](max) NULL,
 	[Status] [int] NOT NULL,
 	[LastStatusUpdate] datetime NOT NULL
  CONSTRAINT [PK_ProductOrders] PRIMARY KEY CLUSTERED 

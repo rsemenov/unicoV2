@@ -16,6 +16,7 @@ namespace Unico.Data.Entities
 		public virtual int Count { get; set; }
 		public virtual decimal Price { get; set; }
 		public virtual WorkType WorkType { get; set; }
+		public virtual string Notes { get; set; }
 		public virtual OrderStatus Status { get; set; }
         public virtual DateTime LastStatusUpdate { get; set; }
     }

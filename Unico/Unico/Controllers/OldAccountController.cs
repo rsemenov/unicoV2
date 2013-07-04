@@ -15,7 +15,7 @@ namespace Unico.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]
-    public class AccountController : Controller
+    public class OldAccountController : Controller
     {
         //
         // GET: /Account/Login

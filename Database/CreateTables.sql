@@ -132,7 +132,68 @@ CREATE TABLE [Transactions](
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+--------------- Accounts --------------------
 GO
+
+CREATE TABLE [Accounts](
+	[AccountId] [int] identity(1,1) NOT NULL,
+	[ExternalId] [uniqueidentifier] NOT NULL,
+	[Email] [nvarchar](500) NOT NULL,
+	[Password] [binary] NOT NULL,
+	[Noise] [nvarchar](max) NOT NULL,
+	[CreatedOn] [datetime] NOT NULL
+ CONSTRAINT [PK_Accounts] PRIMARY KEY CLUSTERED 
+(
+	[AccountId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [Accounts]
+    ADD CONSTRAINT [DF_Accounts_CreatedOn] DEFAULT (getutcdate()) FOR [CreatedOn];
+    
+GO
+
+CREATE TABLE [Profiles](
+	[ProfileId] [int] identity(1,1) NOT NULL,
+	[AccountId] [int] NOT NULL,
+	[CompanyId] [int] NULL,
+	[Name] [nvarchar](500) NOT NULL,
+	[Address] [nvarchar](500) NOT NULL,
+	[Phone] [nvarchar](20) NOT NULL,
+	[SecondPhone] [nvarchar](20) NULL
+ CONSTRAINT [PK_Profiles] PRIMARY KEY CLUSTERED 
+(
+	[ProfileId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+CREATE TABLE [Companies](
+	[CompanyId] [int] identity(1,1) NOT NULL,
+	[CompanyName] [nvarchar](500) NOT NULL,
+	[ContactName] [nvarchar](500) NULL,
+	[EDRPOU] [nvarchar](20) NULL,
+	[INN] [nvarchar](20) NULL,
+	[CertificateNumber] [nvarchar](100) NULL, 
+	[Address] [nvarchar](500) NULL,
+	[Email] [nvarchar](20) NOT NULL,
+	[Phone] [nvarchar](20) NOT NULL,
+	[SecondPhone] [nvarchar](20) NULL,
+	[CreatedOn] [datetime] NOT NULL
+ CONSTRAINT [PK_Companies] PRIMARY KEY CLUSTERED 
+(
+	[CompanyId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [Companies]
+    ADD CONSTRAINT [DF_Companies_CreatedOn] DEFAULT (getutcdate()) FOR [CreatedOn];
+
 
 ALTER TABLE [Transactions] ADD CONSTRAINT [DF_Transactions_CreatedOn] DEFAULT (getutcdate()) FOR [CreatedOn]; 
 

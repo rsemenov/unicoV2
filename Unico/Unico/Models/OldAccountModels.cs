@@ -8,6 +8,13 @@ using System.Web.Security;
 
 namespace Unico.Models
 {
+    public class UserData
+    {
+        public Guid AccountId { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+    }
+
     public class UsersContext : DbContext
     {
         public UsersContext()
@@ -58,8 +65,8 @@ namespace Unico.Models
     public class LoginModel
     {
         [Required]
-        [Display(Name = "Имя пользователя")]
-        public string UserName { get; set; }
+        [Display(Name = "Email")]
+        public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

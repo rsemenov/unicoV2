@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Autofac;
 using Autofac.Integration.Mvc;
 using FluentNHibernate.Cfg;
@@ -12,6 +13,7 @@ using NHibernate.Context;
 using NHibernate.Dialect;
 using NHibernate.Tool.hbm2ddl;
 using Unico.Data.Interfaces;
+using Unico.Infrastructure;
 using Unico.Modules;
 using Unico.Modules.RequestFilters;
 

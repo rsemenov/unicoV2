@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Unico.Data.Entities;
 using Unico.Data.Interfaces;
 
@@ -15,7 +16,8 @@ namespace Unico.Controllers
 
         
         public ActionResult Index()
-        {            
+        {
+            var p = Membership.Provider;
             return View();        
         }
 
@@ -25,6 +27,7 @@ namespace Unico.Controllers
             return PartialView(departments);
         }
 
+        [Authorize]
         public ActionResult About()
         {
             ViewBag.Message = "Страница описания приложения.";

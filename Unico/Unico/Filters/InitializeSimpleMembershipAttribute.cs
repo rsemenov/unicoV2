@@ -8,6 +8,7 @@ using Unico.Models;
 
 namespace Unico.Filters
 {
+    /*
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public sealed class InitializeSimpleMembershipAttribute : ActionFilterAttribute
     {
@@ -46,5 +47,5 @@ namespace Unico.Filters
                 }
             }
         }
-    }
+    }*/
 }

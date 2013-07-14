@@ -23,7 +23,7 @@ namespace Unico.Data.Mappings
 			Map(x => x.Price);
             Map(x => x.WorkType).CustomType<WorkType>();
 			Map(x => x.Notes).Nullable();
-			Map(x => x.OrderStatus).CustomType<OrderStatus>();
+			Map(x => x.Status).CustomType<OrderStatus>();
             Map(x => x.LastStatusUpdate);
 
         }

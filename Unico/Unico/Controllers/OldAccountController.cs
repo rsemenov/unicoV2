@@ -14,7 +14,6 @@ using Unico.Models;
 namespace Unico.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
     public class OldAccountController : Controller
     {
         //
@@ -35,7 +34,7 @@ namespace Unico.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            if (ModelState.IsValid && WebSecurity.Login(model.Email, model.Password, persistCookie: model.RememberMe))
             {
                 return RedirectToLocal(returnUrl);
             }

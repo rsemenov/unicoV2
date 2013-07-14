@@ -15,6 +15,7 @@ namespace Unico.Data.Mappings
             Table("Profiles");
             Schema(DataConfiguration.SchemeName);
 
+            KeyColumn("AccountId");
             Map(x => x.Address);
             Map(x => x.Name);
             Map(x => x.Phone);
@@ -22,6 +23,6 @@ namespace Unico.Data.Mappings
 
             References<Company>(x => x.Company, "CompanyId").Cascade.All();
 
-            
+        }
     }
 }

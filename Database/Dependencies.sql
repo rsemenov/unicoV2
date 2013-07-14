@@ -24,4 +24,15 @@ GO
 ALTER TABLE [dbo].[Products] CHECK CONSTRAINT [FK_Products_Categories]
 GO
 
+USE [unico]
+GO
+
+ALTER TABLE [dbo].[Profiles]  WITH CHECK ADD  CONSTRAINT [FK_Profiles_Companies] FOREIGN KEY([CompanyId])
+REFERENCES [dbo].[Companies] ([CompanyId])
+GO
+
+ALTER TABLE [dbo].[Profiles] CHECK CONSTRAINT [FK_Profiles_Companies]
+GO
+
+
 

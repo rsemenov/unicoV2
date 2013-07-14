@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentNHibernate.Mapping;
 using Unico.Data.Entities;
+using Unico.Data.Enum;
 
 namespace Unico.Data.Mappings
 {
@@ -15,11 +16,14 @@ namespace Unico.Data.Mappings
             Table("Accounts");
             Schema(DataConfiguration.SchemeName);
 
-            Id(x => x.AccountId);
+            Id(x => x.AccountId).Column("AccountId");
+            Map(x => x.ExternalId);
             Map(x => x.Email);
             Map(x => x.Password);
-            Map(x => x.Noise);
-            Map(x => x.CreatedOn).ReadOnly();            
+            Map(x => x.Role).CustomType<AccountRole>();
+            Map(x => x.CreatedOn).ReadOnly();
+
+            OptimisticLock.None();
         }
     }
 }

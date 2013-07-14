@@ -122,7 +122,7 @@ GO
 CREATE TABLE [Transactions](
 	[TransactionId] [int] IDENTITY(1,1) NOT NULL,
 	[OrderId] [uniqueidentifier] NOT NULL,
-	[Reference] [nvarchar](500) NOT NULL,
+	[Reference] [nvarchar](500) NULL,
 	[TransactionType] [int] NOT NULL,
 	[Amount] decimal(10,2) NOT NULL,
 	[CreatedOn] datetime NOT NULL,
@@ -132,15 +132,25 @@ CREATE TABLE [Transactions](
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+GO
+
+ALTER TABLE [Transactions] ADD CONSTRAINT [DF_Transactions_CreatedOn] DEFAULT (getutcdate()) FOR [CreatedOn]; 
+
+USE [unico]
+GO
+
 --------------- Accounts --------------------
+--USE [unico]
+--GO
+
 GO
 
 CREATE TABLE [Accounts](
 	[AccountId] [int] identity(1,1) NOT NULL,
 	[ExternalId] [uniqueidentifier] NOT NULL,
 	[Email] [nvarchar](500) NOT NULL,
-	[Password] [binary] NOT NULL,
-	[Noise] [nvarchar](max) NOT NULL,
+	[Password] [nvarchar](MAX) NOT NULL,
+	[Role] [int] NOT NULL,
 	[CreatedOn] [datetime] NOT NULL
  CONSTRAINT [PK_Accounts] PRIMARY KEY CLUSTERED 
 (
@@ -195,7 +205,5 @@ ALTER TABLE [Companies]
     ADD CONSTRAINT [DF_Companies_CreatedOn] DEFAULT (getutcdate()) FOR [CreatedOn];
 
 
-ALTER TABLE [Transactions] ADD CONSTRAINT [DF_Transactions_CreatedOn] DEFAULT (getutcdate()) FOR [CreatedOn]; 
 
-GO
 

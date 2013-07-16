@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Unico.Configuration;
+using Unico.Infrastructure;
+using Unico.Models;
 
 namespace Unico
 {
@@ -18,6 +20,8 @@ namespace Unico
         protected void Application_Start()
         {
             UnicoConfig.Config();
+
+            ModelBinders.Binders.Add(typeof(UserData), new UserDataModelBinder<UserData>());
 
             AreaRegistration.RegisterAllAreas();
 

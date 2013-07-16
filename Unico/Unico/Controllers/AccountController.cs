@@ -9,6 +9,7 @@ using Unico.Data.Interfaces;
 using Unico.Models;
 using Unico.Data.RepositoryExtensions;
 using Unico.Infrastructure;
+using WebMatrix.WebData;
 
 namespace Unico.Controllers
 {
@@ -53,7 +54,7 @@ namespace Unico.Controllers
                         AccountId = account.ExternalId,
                         Email = account.Email
                     };
-
+                    
                     Response.SetAuthCookie(account.ExternalId.ToString(), model.RememberMe, userData);
 
                     if (Url.IsLocalUrl(returnUrl))
@@ -119,6 +120,24 @@ namespace Unico.Controllers
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult LoginWidget(UserData userData)
+        {
+            LoginWidgetModel model = new LoginWidgetModel();
+            if (null != userData)
+                model.UserData = userData;
+
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
 
     }

@@ -8,6 +8,11 @@ using System.Web.Security;
 
 namespace Unico.Models
 {
+    public class LoginWidgetModel
+    {
+        public UserData UserData { get; set; }
+    }
+
     public class UserData
     {
         public Guid AccountId { get; set; }

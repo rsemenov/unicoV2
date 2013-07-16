@@ -196,7 +196,7 @@
     <Compile Include="Infrastructure\AccountRoleProvider.cs" />
     <Compile Include="Infrastructure\HttpResponseBaseExtensions.cs" />
     <Compile Include="Infrastructure\UserDataModelBinder.cs" />
-    <Compile Include="Models\OldAccountModels.cs" />
+    <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Modules\RequestFilters\IRequestFilter.cs" />
     <Compile Include="Modules\NHibernateSessionModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -316,6 +316,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\_Menu.cshtml" />
     <Content Include="Views\Category\Show.cshtml" />
+    <Content Include="Views\Account\LoginWidget.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

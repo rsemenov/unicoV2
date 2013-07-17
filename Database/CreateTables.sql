@@ -126,7 +126,7 @@ CREATE TABLE [Transactions](
 	[TransactionType] [int] NOT NULL,
 	[Amount] decimal(10,2) NOT NULL,
 	[CreatedOn] datetime NOT NULL,
- CONSTRAINT [PK_Filters] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_Transactions] PRIMARY KEY CLUSTERED 
 (
 	[TransactionId] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -136,8 +136,8 @@ GO
 
 ALTER TABLE [Transactions] ADD CONSTRAINT [DF_Transactions_CreatedOn] DEFAULT (getutcdate()) FOR [CreatedOn]; 
 
-USE [unico]
-GO
+--USE [unico]
+--GO
 
 --------------- Accounts --------------------
 --USE [unico]

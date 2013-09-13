@@ -20,6 +20,7 @@ namespace Unico.Data.Mappings
             Map(x => x.Description).Nullable();
             Map(x => x.Name);
             Map(x => x.Price);
+            Map(x => x.ExternalId);
             Map(x => x.Availability).CustomType<ProductAvailability>();
             Map(x => x.Cartridge).Nullable();
 

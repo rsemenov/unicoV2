@@ -6,6 +6,11 @@ using System.Web;
 
 namespace Unico.Models
 {
+    public class ShoppingCartWidgetModel
+    {
+        public int Count { get; set; }
+    }
+
     public class ShoppingCartModel
     {
         public IList<CartItem> CartItems { get; set; }

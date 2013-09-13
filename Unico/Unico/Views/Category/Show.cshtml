@@ -8,6 +8,11 @@
 
 <h3>@Model.Name</h3>
 <br />
+
+<div id="cart1">
+    @Html.Action("ShoppingCartWidget", "ShoppingCart")
+</div>
+
 <table id="category-table">
     <thead>
         <tr>
@@ -36,6 +41,18 @@
             <td>@Html.Label("cartridge", p.Cartridge)</td>
             <td>@Html.Label("availability", p.Availability.ConvertToString())</td>
             <td>@Html.Label("price", p.Price.ToString("F"))</td>
+            <td>@using (Ajax.BeginForm("AddProduct", "ShoppingCart", new AjaxOptions
+                                         {
+                                                UpdateTargetId = "cart1",
+                                                InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace,
+                                                HttpMethod = "POST"
+                                         }))
+                {
+                    <input type="hidden" name="count" value="1" />
+                    <input type="hidden" name="productId" value="@p.ExternalId" />
+                    <input type="submit" value="В корзину"/>
+                }
+            </td>
         @:</tr>
     }
 </table>

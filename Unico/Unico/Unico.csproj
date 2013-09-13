@@ -196,8 +196,10 @@
     <Compile Include="Infrastructure\AccountMembershipProvider.cs" />
     <Compile Include="Infrastructure\AccountRoleProvider.cs" />
     <Compile Include="Infrastructure\HttpResponseBaseExtensions.cs" />
+    <Compile Include="Infrastructure\SessionFacade.cs" />
     <Compile Include="Infrastructure\UserDataModelBinder.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ShoppingCartModel.cs" />
     <Compile Include="Modules\RequestFilters\IRequestFilter.cs" />
     <Compile Include="Modules\NHibernateSessionModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -318,6 +320,7 @@
     <Content Include="Views\Home\_Menu.cshtml" />
     <Content Include="Views\Category\Show.cshtml" />
     <Content Include="Views\Account\LoginWidget.cshtml" />
+    <Content Include="Views\ShoppingCart\ShoppingCartWidget.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -347,7 +350,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>1031</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:2489/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

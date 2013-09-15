@@ -1,0 +1,3 @@
+﻿@model Unico.Models.ShoppingCartWidgetModel
+
+@Html.ActionLink("Корзина ("+Model.Count+")", "Index", "ShoppingCart", routeValues: null, htmlAttributes: new { id = "cartLink" })

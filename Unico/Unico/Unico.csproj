@@ -321,6 +321,7 @@
     <Content Include="Views\Category\Show.cshtml" />
     <Content Include="Views\Account\LoginWidget.cshtml" />
     <Content Include="Views\ShoppingCart\ShoppingCartWidget.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

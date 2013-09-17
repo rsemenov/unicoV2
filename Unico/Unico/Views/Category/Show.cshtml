@@ -9,9 +9,7 @@
 <h3>@Model.Name</h3>
 <br />
 
-<div id="cart1">
-    @Html.Action("ShoppingCartWidget", "ShoppingCart")
-</div>
+<!--@Html.Action("ShoppingCartWidget", "ShoppingCart")-->
 
 <table id="category-table">
     <thead>
@@ -43,9 +41,9 @@
             <td>@Html.Label("price", p.Price.ToString("F"))</td>
             <td>@using (Ajax.BeginForm("AddProduct", "ShoppingCart", new AjaxOptions
                                          {
-                                                UpdateTargetId = "cart1",
-                                                InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace,
-                                                HttpMethod = "POST"
+                                             UpdateTargetId = "shopingCart",
+                                             InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace,
+                                             HttpMethod = "Get"
                                          }))
                 {
                     <input type="hidden" name="count" value="1" />

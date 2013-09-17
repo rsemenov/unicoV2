@@ -45,7 +45,7 @@ namespace Unico.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult ShoppingCartWidget(UserData userData)
+        public PartialViewResult ShoppingCartWidget(UserData userData)
         {
             var model = new ShoppingCartWidgetModel();
             if (null != userData)
@@ -55,13 +55,13 @@ namespace Unico.Controllers
                 model.Count = itemsCount;
             }
 
-            return PartialView(model);
+            return PartialView("ShoppingCartWidget", model);
         }
 
-        [HttpPost]
+        //[HttpPost]
         //[Authorize]
         [AllowAnonymous]
-        public ActionResult AddProduct(Guid productId, int count, UserData userData)
+        public PartialViewResult AddProduct(Guid productId, int count, UserData userData)
         {
             var shoppingCartId = Session.GetShoppingCardId();
             var cartItem = new Unico.Data.Entities.CartItem() { OrderId = shoppingCartId, Count = count, ProductId = productId };

@@ -21,27 +21,7 @@ namespace Unico.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult Index(UserData userData)
         {
-            var shoppingCartId = Session.GetShoppingCardId();
-            var items = CartItemsRepository.FindAll(cart => cart.OrderId == shoppingCartId);
-
-            var model = new ShoppingCartModel()
-            {
-                CartItems = items.Select(item => 
-                {
-                    var product = ProductsRepository.Find(p => p.ExternalId == item.ProductId);
-                    return new Unico.Models.CartItem()
-                    {
-                        ProductId = product.ExternalId,
-                        Brand = product.Brand.Name,
-                        Count = item.Count,
-                        Description = product.Description,
-                        Name = product.Name,
-                        Price = product.Price                        
-                    };
-               }).ToList()
-            };
-
-            return View(model);
+             return View(GetShoppingCartModel(userData));
         }
 
         [AllowAnonymous]
@@ -59,8 +39,7 @@ namespace Unico.Controllers
         }
 
         //[HttpPost]
-        //[Authorize]
-        [AllowAnonymous]
+        [Authorize]
         public PartialViewResult AddProduct(Guid productId, int count, UserData userData)
         {
             var shoppingCartId = Session.GetShoppingCardId();
@@ -70,9 +49,62 @@ namespace Unico.Controllers
                 cartItem = new Unico.Data.Entities.CartItem() { OrderId = shoppingCartId, ProductId = productId };
             }
             cartItem.Count += count;
-            CartItemsRepository.SaveOrUpdateAll(new[] { cartItem });
+            CartItemsRepository.SaveOrUpdateAll(cartItem);
             return ShoppingCartWidget(userData);
         }
+
+        [Authorize]
+        public PartialViewResult SetCount(Guid productId, int count, UserData userData)
+        {
+            if (count == 0)
+            {
+                return DeleteItem(productId, userData);
+            }
+            var shoppingCartId = Session.GetShoppingCardId();
+            var cartItem = CartItemsRepository.Find(c => c.OrderId == shoppingCartId && c.ProductId == productId);
+            if (cartItem != null)
+            {
+                cartItem.Count = count;
+                CartItemsRepository.SaveOrUpdateAll(cartItem);
+            }
+            return PartialView("ShoppingCartTable", GetShoppingCartModel(userData));
+        }
+
+        [Authorize]
+        public PartialViewResult DeleteItem(Guid productId, UserData userData)
+        {
+            var shoppingCartId = Session.GetShoppingCardId();
+            var cartItem = CartItemsRepository.Find(c => c.OrderId == shoppingCartId && c.ProductId == productId);
+            if (cartItem != null)
+            {                
+                CartItemsRepository.Delete(cartItem);
+            }
+            return PartialView("ShoppingCartTable", GetShoppingCartModel(userData));
+        }
+
+        private ShoppingCartModel GetShoppingCartModel(UserData userData)
+        {
+            var shoppingCartId = Session.GetShoppingCardId();
+            var items = CartItemsRepository.FindAll(cart => cart.OrderId == shoppingCartId);
+
+            return new ShoppingCartModel()
+            {
+                CartItems = items.Select(item =>
+                {
+                    var product = ProductsRepository.Find(p => p.ExternalId == item.ProductId);
+                    return new Unico.Models.CartItem()
+                    {
+                        ProductId = product.ExternalId,
+                        Brand = product.Brand.Name,
+                        Count = item.Count,
+                        Description = product.Description,
+                        Name = product.Name,
+                        Price = product.Price
+                    };
+                }).ToList()
+            };
+        }
+
 
     }
 }

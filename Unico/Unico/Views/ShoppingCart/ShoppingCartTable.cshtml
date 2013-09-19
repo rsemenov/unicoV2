@@ -1,0 +1,64 @@
+﻿@model Unico.Models.ShoppingCartModel
+
+<div id="shopping-cart-table">
+<table id="category-table">
+    <thead>
+        <tr>
+            <th>Наименование</th>
+            <th>Бренд</th>
+            <th>Описание</th>
+            <th>Цена в грн.</th>
+            <th>Количество</th>
+            <th>Сумма</th>
+        </tr>
+    </thead>
+    @for (int i = 0; i < Model.CartItems.Count; i++ )
+    {
+        var p = Model.CartItems[i];
+        if (i % 2 == 0)
+        {
+            @:<tr>            
+        }
+        else
+        {
+            @:<tr class="category-table-row-odd">
+        }
+            <td>@Html.Label("name", p.Name)</td>
+            <td>@Html.Label("brand", p.Brand)</td>
+            <td>@Html.Label("desc", p.Description)</td>
+            <td>@Html.Label("price", p.Price.ToString("F"))</td>
+            <td>@using (Ajax.BeginForm("SetCount", "ShoppingCart", new AjaxOptions
+                                         {
+                                                UpdateTargetId = "shopping-cart-table",
+                                                InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace,
+                                                HttpMethod = "POST"
+                                         }))
+                {
+                    <input type="text" name="count" value="@p.Count" />
+                    <input type="hidden" name="productId" value="@p.ProductId" />
+                    <input type="submit" value=" * "/>
+                }
+            </td>
+            <td>@Html.Label("amount", p.Amount.ToString("F"))</td>
+            <td>@using (Ajax.BeginForm("DeleteItem", "ShoppingCart", new AjaxOptions
+                                         {
+                                                UpdateTargetId = "shopping-cart-table",
+                                                InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace,
+                                                HttpMethod = "POST"
+                                         }))
+                {
+                    <input type="hidden" name="productId" value="@p.ProductId" />
+                    <input type="submit" value="Удалить"/>
+                }
+            </td>
+        @:</tr>
+    }
+
+</table>
+
+<div>
+   @Html.LabelFor((m)=>m.TotalAmount) 
+   @Html.Label("amount", Model.TotalAmount.ToString("F"))    
+</div>
+</div>
+    

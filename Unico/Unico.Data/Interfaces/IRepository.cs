@@ -57,11 +57,13 @@ namespace Unico.Data.Interfaces
             {
                 Session.SaveOrUpdate(item);
             }
+            Session.Flush();
         }
 
         public void Delete(T entity)
         {
             Session.Delete(entity);
+            Session.Flush();
         }
     }
 }

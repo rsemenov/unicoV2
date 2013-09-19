@@ -1,6 +1,5 @@
 ﻿@model Unico.Models.ShoppingCartWidgetModel
 
 <div id="shopingCart">
-    <!--@Html.AntiForgeryToken()-->
     @Html.ActionLink("Корзина ("+Model.Count+")", "Index", "ShoppingCart", routeValues: null, htmlAttributes: new { id = "cartLink" })
 </div>

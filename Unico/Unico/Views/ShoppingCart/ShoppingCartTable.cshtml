@@ -1,7 +1,12 @@
 ﻿@model Unico.Models.ShoppingCartModel
 
 <div id="shopping-cart-table">
-<table id="category-table">
+@if (Model.CartItems.Count == 0)
+{
+    <h3>Ваша корзина пуста</h3>
+}
+else
+{@:<table id="category-table">
     <thead>
         <tr>
             <th>Наименование</th>
@@ -12,7 +17,7 @@
             <th>Сумма</th>
         </tr>
     </thead>
-    @for (int i = 0; i < Model.CartItems.Count; i++ )
+    for (int i = 0; i < Model.CartItems.Count; i++ )
     {
         var p = Model.CartItems[i];
         if (i % 2 == 0)
@@ -54,11 +59,14 @@
         @:</tr>
     }
 
-</table>
+@:</table>
 
 <div>
    @Html.LabelFor((m)=>m.TotalAmount) 
    @Html.Label("amount", Model.TotalAmount.ToString("F"))    
 </div>
+}
+ 
 </div>
+
     

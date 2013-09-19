@@ -18,7 +18,7 @@ namespace Unico.Controllers
 
         //
         // GET: /ShoppingCart/
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Index(UserData userData)
         {
             var shoppingCartId = Session.GetShoppingCardId();
@@ -64,7 +64,12 @@ namespace Unico.Controllers
         public PartialViewResult AddProduct(Guid productId, int count, UserData userData)
         {
             var shoppingCartId = Session.GetShoppingCardId();
-            var cartItem = new Unico.Data.Entities.CartItem() { OrderId = shoppingCartId, Count = count, ProductId = productId };
+            var cartItem = CartItemsRepository.Find(c => c.OrderId == shoppingCartId && c.ProductId == productId);
+            if (cartItem == null)
+            {
+                cartItem = new Unico.Data.Entities.CartItem() { OrderId = shoppingCartId, ProductId = productId };
+            }
+            cartItem.Count += count;
             CartItemsRepository.SaveOrUpdateAll(new[] { cartItem });
             return ShoppingCartWidget(userData);
         }

@@ -32,7 +32,7 @@
             <td>@Html.Label("brand", p.Brand)</td>
             <td>@Html.Label("desc", p.Description)</td>
             <td>@Html.Label("price", p.Price.ToString("F"))</td>
-            <td>@Html.Label("count", p.Count)</td>
+            <td>@Html.Label("count", p.Count.ToString())</td>
             <td>@Html.Label("amount", p.Amount.ToString("F"))</td>
             <td>@using (Ajax.BeginForm("AddProduct", "ShoppingCart", new AjaxOptions
                                          {
@@ -43,7 +43,7 @@
                 {
                     <input type="hidden" name="count" value="1" />
                     <input type="hidden" name="productId" value="@p.ProductId" />
-                    <input type="submit" value="В корзину"/>
+                    <input type="hidden" value="В корзину"/>
                 }
             </td>
         @:</tr>
@@ -52,5 +52,6 @@
 </table>
 
 <div>
-    @Html.Label("TotalAmount", Model.TotalAmount);
+    @Html.LabelFor((m)=>m.TotalAmount) @Html.Label(@Model.TotalAmount.ToString("F"))
+    
 </div>

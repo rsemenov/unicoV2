@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unico", "Unico\Unico.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unico.Data", "Unico.Data\Unico.Data.csproj", "{54E0E58F-E8D3-4098-919E-A086DD7B339B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unico.Tests", "Unico.Tests\Unico.Tests.csproj", "{9AFC6A4C-5EFD-4E8A-BACD-E9B61BB4007B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{54E0E58F-E8D3-4098-919E-A086DD7B339B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54E0E58F-E8D3-4098-919E-A086DD7B339B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54E0E58F-E8D3-4098-919E-A086DD7B339B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AFC6A4C-5EFD-4E8A-BACD-E9B61BB4007B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AFC6A4C-5EFD-4E8A-BACD-E9B61BB4007B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AFC6A4C-5EFD-4E8A-BACD-E9B61BB4007B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AFC6A4C-5EFD-4E8A-BACD-E9B61BB4007B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

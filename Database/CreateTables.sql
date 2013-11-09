@@ -35,7 +35,8 @@ CREATE TABLE [Products](
 	[Price] decimal(10,2) NOT NULL,
 	[Brand] int NOT NULL,
 	[Availability] int NOT NULL,
-	[Cartridge] [nvarchar](max) NULL
+	[Cartridge] [nvarchar](max) NULL,
+	[Image] [nvarchar](max) NULL
  CONSTRAINT [PK_Products] PRIMARY KEY CLUSTERED 
 (
 	[ProductId] ASC
@@ -203,6 +204,24 @@ GO
 
 ALTER TABLE [Companies]
     ADD CONSTRAINT [DF_Companies_CreatedOn] DEFAULT (getutcdate()) FOR [CreatedOn];
+    
+
+--------- OCP TABLES---------
+CREATE TABLE [OcpProducts](
+	[OcpProductId] [int] identity(1,1) NOT NULL,
+	[ProductId] [int] NOT NULL,
+	[Key] [nvarchar](100) NOT NULL,
+	[Color] [nvarchar](100) NOT NULL,
+	[Weight] [int] NOT NULL
+ CONSTRAINT [PK_OcpProducts] PRIMARY KEY CLUSTERED 
+(
+	[OcpProductId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
 
 
 

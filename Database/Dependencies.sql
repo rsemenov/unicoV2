@@ -34,5 +34,13 @@ GO
 ALTER TABLE [dbo].[Profiles] CHECK CONSTRAINT [FK_Profiles_Companies]
 GO
 
+---------- OCP TABELS ---------
+ALTER TABLE [dbo].[OcpProducts]  WITH CHECK ADD CONSTRAINT [FK_OcpProducts_ProductId] FOREIGN KEY([ProductId])
+REFERENCES [dbo].[Products] ([ProductId])
+GO
+
+ALTER TABLE [dbo].[OcpProducts] CHECK CONSTRAINT [FK_OcpProducts_ProductId]
+
+
 
 

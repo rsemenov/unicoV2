@@ -15,7 +15,7 @@ using CartItem = Unico.Data.Entities.CartItem;
 
 namespace Unico.Tests
 {
-    [TestFixture, Parallelizable]
+    [TestFixture, Parallelizable(TestScope.Self)]
     public class ShoppingCartControllerTests : BaseTestFixture<ShoppingCartController>
     {
         private LocalValue<Mock<IRepository<CartItem>>> _cartItemsRepositoryMock = 
@@ -80,22 +80,13 @@ namespace Unico.Tests
             });
         }
 
-        [Test]
-        public void ProductShouldBeAddedToCartItemsRepository_WhenAddProductCalled()
+        [Test(Order = 1)]
+        public void ShoppingCartWidget_ShouldReturnEmptyModel_WhenUserDataIsNull()
         {
-            Sut.AddProduct(_productId, 1, null);
-
-            _cartItemsRepositoryMock.Value.Verify(repo => 
-                repo.SaveOrUpdateAll(It.Is<CartItem[]>(arr => arr[0].ProductId == _productId)), Times.Once);
-        }
-
-        [Test]
-        public void CorrectItemsCountShouldBeReturned_WhenAddProductCalled()
-        {
-            var res = Sut.AddProduct(_productId, 1, new UserData());
+            var res = Sut.ShoppingCartWidget(null);
 
             var model = (ShoppingCartWidgetModel)res.Model;
-            Assert.IsTrue(model.Count == 4);
+            Assert.IsTrue(model.Count == 0);
         }
 
         [Test(Order = 2)]
@@ -107,15 +98,6 @@ namespace Unico.Tests
             Assert.IsTrue(model.CartItems.Count == 2);
         }
 
-        [Test(Order = 1)]
-        public void ShoppingCartWidget_ShouldReturnEmptyModel_WhenUserDataIsNull()
-        {
-            var res = Sut.ShoppingCartWidget(null);
-
-            var model = (ShoppingCartWidgetModel) res.Model;
-            Assert.IsTrue(model.Count == 0);
-        }
-
         [Test(Order = 3)]
         public void SetCount_ShouldDeleteProductCorrectly_WhenCountIsZero()
         {
@@ -125,7 +107,25 @@ namespace Unico.Tests
             Assert.IsTrue(model.CartItems.Count == 2);
         }
 
-        [Test]
+        [Test(Order = 4)]
+        public void ProductShouldBeAddedToCartItemsRepository_WhenAddProductCalled()
+        {
+            Sut.AddProduct(_productId, 1, null);
+
+            _cartItemsRepositoryMock.Value.Verify(repo => 
+                repo.SaveOrUpdateAll(It.Is<CartItem[]>(arr => arr[0].ProductId == _productId)), Times.Once);
+        }
+
+        [Test(Order = 6)]
+        public void CorrectItemsCountShouldBeReturned_WhenAddProductCalled()
+        {
+            var res = Sut.AddProduct(_productId, 1, new UserData());
+
+            var model = (ShoppingCartWidgetModel)res.Model;
+            Assert.IsTrue(model.Count == 4);
+        }
+        
+        [Test(Order = 5)]
         public void SetCount_ShouldUpdateCountCorrectly_WhenCountIsSet()
         {
             var res = Sut.SetCount(_productId, 4, new UserData());

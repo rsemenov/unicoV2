@@ -1,0 +1,7 @@
+Login,Password,Result,Text
+ruslansmnv+1@gmail.com,asd123Q,1,"Здравствуйте"
+wrong@email.com,somePass2,0,"Имя пользователя или пароль указаны неверно"
+sfdsfs@email.com,sdfsdf,0,"Имя пользователя или пароль указаны неверно"
+,gyjgh67575,0,">Требуется поле Email.</span>"
+34tr3e4r@email.com,,0,">Требуется поле Пароль.</span>"
+,,0,">Требуется поле Email.</span>"

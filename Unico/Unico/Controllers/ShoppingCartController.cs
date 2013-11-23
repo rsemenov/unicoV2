@@ -84,6 +84,7 @@ namespace Unico.Controllers
 
         private ShoppingCartModel GetShoppingCartModel(UserData userData)
         {
+
             var shoppingCartId = Session.GetShoppingCardId();
             var items = CartItemsRepository.FindAll(cart => cart.OrderId == shoppingCartId);
 

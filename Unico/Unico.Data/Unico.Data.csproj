@@ -58,6 +58,7 @@
     <Compile Include="Entities\CartItem.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Filters.cs" />
+    <Compile Include="Entities\OcpProduct.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Department.cs" />
@@ -65,6 +66,9 @@
     <Compile Include="Entities\Brand.cs" />
     <Compile Include="Entities\ProductOrder.cs" />
     <Compile Include="Entities\Transaction.cs" />
+    <Compile Include="Mappings\CartrigeMap.cs" />
+    <Compile Include="Mappings\OcpProductMap.cs" />
+    <Compile Include="Mappings\PrinterMap.cs" />
     <Compile Include="RepositoryExtensions\AccountProfileRepositoryExtensions.cs" />
     <Compile Include="Enum\AccountRole.cs" />
     <Compile Include="Enum\FilterType.cs" />

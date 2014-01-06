@@ -20,6 +20,7 @@ namespace Unico
         protected void Application_Start()
         {
             UnicoConfig.Config();
+            UnicoConfig.ConfigureAutoMapper();
 
             ModelBinders.Binders.Add(typeof(UserData), new UserDataModelBinder<UserData>());
 

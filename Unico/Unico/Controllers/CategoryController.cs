@@ -22,7 +22,7 @@ namespace Unico.Controllers
                 return View(cat);
             }
 
-            return RedirectToAction("PageNotFound", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
     }

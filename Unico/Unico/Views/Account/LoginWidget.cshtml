@@ -1,10 +1,10 @@
 ﻿@model Unico.Models.LoginWidgetModel
 @if (Request.IsAuthenticated && Model.UserData!=null) {
     <text>
-        Здравствуйте, @Html.ActionLink(Model.UserData.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Управление" })!
         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
             @Html.AntiForgeryToken()
-            <a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+            @Html.DisplayFor(model => model.UserData.Name)
+             <a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
         }
     </text>
 } else {

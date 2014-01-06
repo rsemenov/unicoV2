@@ -48,6 +48,12 @@
     <Reference Include="Autofac.Integration.Mvc">
       <HintPath>..\packages\Autofac.Mvc4.3.0.0\lib\net40\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="BCrypt.Net">
       <HintPath>..\packages\BCrypt-Official.0.1.107\lib\BCrypt.Net.dll</HintPath>
     </Reference>
@@ -185,20 +191,25 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Configuration\UnicoConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\OcpController.cs" />
     <Compile Include="Controllers\OldAccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AjaxAuthorizeAttribute.cs" />
+    <Compile Include="Helpers\HashHelper.cs" />
     <Compile Include="Infrastructure\AccountMembershipProvider.cs" />
     <Compile Include="Infrastructure\AccountRoleProvider.cs" />
     <Compile Include="Infrastructure\HttpResponseBaseExtensions.cs" />
     <Compile Include="Infrastructure\SessionFacade.cs" />
     <Compile Include="Infrastructure\UserDataModelBinder.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\ShoppingCartModel.cs" />
     <Compile Include="Modules\RequestFilters\IRequestFilter.cs" />
     <Compile Include="Modules\NHibernateSessionModule.cs" />
@@ -323,6 +334,9 @@
     <Content Include="Views\ShoppingCart\ShoppingCartWidget.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\ShoppingCartTable.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Ocp\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

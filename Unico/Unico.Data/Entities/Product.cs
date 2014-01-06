@@ -20,4 +20,23 @@ namespace Unico.Data.Entities
         public virtual ProductAvailability Availability { get; set; }
         public virtual string Cartridge { get; set; }
     }
+
+    public class Cartrige:IEntity
+    {
+        public virtual int CartrigeId { get; set; }
+        public virtual string Name { get; set; }
+        public virtual string Value { get; set; }
+        public virtual IList<OcpProduct> OcpProducts { get; set; }
+        public virtual IList<Printer> Printers { get; set; }
+    }
+
+    public class Printer : IEntity
+    {
+        public virtual int PrinterId { get; set; }
+        public virtual string Name { get; set; }
+        public virtual string Value { get; set; }
+        public virtual Brand Brand { get; set; }
+        public virtual IList<Cartrige> Cartriges { get; set; }
+    }
+
 }

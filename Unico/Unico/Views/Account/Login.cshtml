@@ -4,12 +4,16 @@
     ViewBag.Title = "Выполнить вход";
 }
 
+<table>
+    <tr>
+        
+    </tr>
+</table>
 <hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
+    <h3>Выполнить вход</h3>
 </hgroup>
-
+<br/>
 <section id="loginForm">
-<h2>Используйте для входа локальную учетную запись.</h2>
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -32,8 +36,9 @@
                 @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
             </li>
         </ol>
-        <input type="submit" value="Выполнить вход" />
+        <input type="submit" value="Вход" />
     </fieldset>
+    <br/>
     <p>
         @Html.ActionLink("Зарегистрируйтесь", "Register"), если у вас нет учетной записи.
     </p>

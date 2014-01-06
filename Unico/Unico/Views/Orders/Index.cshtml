@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Unico.Models.OrderModel>
+
+@{
+    ViewBag.Title = "Заказы";
+}
+
+<h3>Мои заказы</h3>
+
+<table id="category-table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClosedOn)
+        </th>
+        <th>
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Number)
+        </td>       
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClosedOn)
+        </td>
+        <td>
+            @Html.ActionLink("Подробнее", "Details", new { orderId=item.ExternalId })
+        </td>
+    </tr>
+}
+
+</table>

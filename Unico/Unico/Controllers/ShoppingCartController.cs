@@ -7,10 +7,10 @@ using Unico.Data.Entities;
 using Unico.Data.Interfaces;
 using Unico.Models;
 using Unico.Infrastructure;
+using Unico.Helpers;
 
 namespace Unico.Controllers
 {
-    [Authorize]
     public class ShoppingCartController : Controller
     {
         public IRepository<Data.Entities.CartItem> CartItemsRepository { get; set; }
@@ -19,6 +19,7 @@ namespace Unico.Controllers
         //
         // GET: /ShoppingCart/
         //[ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Index(UserData userData)
         {
              return View(GetShoppingCartModel(userData));
@@ -38,8 +39,8 @@ namespace Unico.Controllers
             return PartialView("ShoppingCartWidget", model);
         }
 
-        //[HttpPost]
-        [Authorize]
+        [HttpPost]
+        [AjaxAuthorize]
         public PartialViewResult AddProduct(Guid productId, int count, UserData userData)
         {
             var shoppingCartId = Session.GetShoppingCardId();
@@ -53,7 +54,7 @@ namespace Unico.Controllers
             return ShoppingCartWidget(userData);
         }
 
-        [Authorize]
+        [AjaxAuthorize]
         public PartialViewResult SetCount(Guid productId, int count, UserData userData)
         {
             if (count == 0)
@@ -70,7 +71,7 @@ namespace Unico.Controllers
             return PartialView("ShoppingCartTable", GetShoppingCartModel(userData));
         }
 
-        [Authorize]
+        [AjaxAuthorize]
         public PartialViewResult DeleteItem(Guid productId, UserData userData)
         {
             var shoppingCartId = Session.GetShoppingCardId();

@@ -19,6 +19,7 @@ namespace Unico.Data.Mappings
             Id(x => x.OrderId);
             Map(x => x.ExternalId);
             Map(x => x.AccountId);
+            Map(x => x.Number);
             Map(x => x.CreatedOn);
 			Map(x => x.ClosedOn).Nullable();
 

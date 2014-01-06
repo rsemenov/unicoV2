@@ -63,7 +63,16 @@ else
 
 <div>
    @Html.LabelFor((m)=>m.TotalAmount) 
-   @Html.Label("amount", Model.TotalAmount.ToString("F"))    
+   @Html.Label("amount", Model.TotalAmount.ToString("F"))  
+    
+   @using (Html.BeginForm("CreateOrder", "Orders", new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+       <fieldset>
+           <legend></legend>
+           <input type="submit" value="Сделать заказ" />
+       </fieldset>
+}
 </div>
 }
  

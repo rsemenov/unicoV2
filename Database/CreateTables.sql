@@ -1,3 +1,5 @@
+Create Database [unico]
+GO
 USE [unico]
 GO
 
@@ -70,12 +72,13 @@ CREATE TABLE [CartItems](
 
 GO
 
-CREATE TABLE [Orders](	
+CREATE TABLE [Orders](
 	[OrderId] [int] IDENTITY(1,1) NOT NULL,
 	[ExternalId] [uniqueidentifier] NOT NULL,
 	[AccountId] [uniqueidentifier] NOT NULL,
-	[CreatedOn] datetime NOT NULL,
-	[ClosedOn] datetime NULL
+	[Number] varchar(10) NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[ClosedOn] [datetime] NULL,
  CONSTRAINT [PK_Orders] PRIMARY KEY CLUSTERED 
 (
 	[OrderId] ASC

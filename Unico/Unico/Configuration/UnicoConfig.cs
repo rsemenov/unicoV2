@@ -16,6 +16,9 @@ using Unico.Data.Interfaces;
 using Unico.Infrastructure;
 using Unico.Modules;
 using Unico.Modules.RequestFilters;
+using AutoMapper;
+using Unico.Data.Entities;
+using Unico.Models;
 
 namespace Unico.Configuration
 {
@@ -56,6 +59,12 @@ namespace Unico.Configuration
         private static IRequestFilter GetRequestFilter()
         {
             return new ServiceRequestFilter(new[] { ".*/Content/.*", ".*/Scripts/.*", ".*/Images/.*" });
+        }
+
+        public static void ConfigureAutoMapper()
+        {
+            Mapper.CreateMap<Order, OrderModel>();
+            Mapper.CreateMap<ProductOrder, OrderItemModel>();
         }
     }
 }

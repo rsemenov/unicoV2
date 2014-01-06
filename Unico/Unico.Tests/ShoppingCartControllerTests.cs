@@ -116,7 +116,7 @@ namespace Unico.Tests
                 repo.SaveOrUpdateAll(It.Is<CartItem[]>(arr => arr[0].ProductId == _productId)), Times.Once);
         }
 
-        [Test(Order = 6)]
+        [Test(Order = 5)]
         public void CorrectItemsCountShouldBeReturned_WhenAddProductCalled()
         {
             var res = Sut.AddProduct(_productId, 1, new UserData());
@@ -125,7 +125,7 @@ namespace Unico.Tests
             Assert.IsTrue(model.Count == 4);
         }
         
-        [Test(Order = 5)]
+        [Test(Order = 6)]
         public void SetCount_ShouldUpdateCountCorrectly_WhenCountIsSet()
         {
             var res = Sut.SetCount(_productId, 4, new UserData());

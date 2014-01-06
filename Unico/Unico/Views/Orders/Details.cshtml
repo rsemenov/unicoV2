@@ -1,0 +1,91 @@
+﻿@model Unico.Models.OrderModel
+
+@{
+    ViewBag.Title = "Описание заказа";
+}
+
+<h3>Описание заказа</h3>
+
+<fieldset>
+    <legend></legend>
+    <table>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Number)</td>
+            <td>@Html.DisplayFor(model => model.Number)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.CreatedOn)</td>
+            <td>@Html.DisplayFor(model => model.CreatedOn)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.ClosedOn)</td>
+            <td>@Html.DisplayFor(model => model.ClosedOn)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Status)</td>
+            <td>@Html.DisplayFor(model => model.Status)</td>
+        </tr>
+    </table>
+
+    <table id="category-table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].ProductDetails)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].Count)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].WorkType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].Notes)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Items) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>       
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductDetails)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WorkType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+            </tr>
+        }
+
+    </table>
+    <table>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Amount)</td>
+            <td>@Html.DisplayFor(model => model.Amount)</td>
+        </tr>
+    </table>
+</fieldset>
+<p>
+    @Html.ActionLink("Все заказы", "Index")
+</p>

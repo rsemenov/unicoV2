@@ -20,5 +20,10 @@ namespace Unico.Infrastructure
             }
             return (Guid)session[SessionKeys.ShoppingCardId];
         }
+
+        public static void NewShoppingCardId(this HttpSessionStateBase session)
+        {
+            session[SessionKeys.ShoppingCardId] = Guid.NewGuid();
+        }
     }
 }

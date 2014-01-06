@@ -85,19 +85,27 @@ namespace Unico.Models
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "Имя пользователя")]
+        [Display(Name = "Email")]
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Значение \"{0}\" должно содержать не менее {2} символов.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Значение \"{0}\" должно содержать не менее {2} символов", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Подтверждение пароля")]
-        [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
+        [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Телефон")]
+        [RegularExpression(@"\d{10}",ErrorMessage = "Телефон задан не верно")]
+        public string Phone { get; set; }
+
+        [Display(Name = "Адрес")]
+        public string Address { get; set; }
     }
 
     public class ExternalLogin

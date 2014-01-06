@@ -104,8 +104,8 @@ namespace Unico.Controllers
                         Email = model.UserName,
                         Name = model.UserName,
                         Role = Data.Enum.AccountRole.User,
-                        Address = "",
-                        Phone = ""                        
+                        Address = model.Address,
+                        Phone = model.Phone                        
                     };
 
                     AccountRepository.RegisterAccount(account, model.Password);

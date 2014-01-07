@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Unico.Models.OcpProductModel>
+<div id="ocpTable">
+    <table id="category-table">
+        <tr>
+             <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Key)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cartridge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+        @{
+            int i = 0;
+        }
+        @foreach (var item in Model) {
+            if (i%2 == 0)
+            {
+                @:<tr>            
+            }
+            else
+            {
+                @:<tr class="category-table-row-odd">
+            }
+            i++;
+            <td>
+                    <img src="@Url.Content("http://ocp.com.ua"+item.Image.Replace("stmb","tmb") )" alt="@item.Name" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Key)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cartridge)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @using (Ajax.BeginForm("AddProduct", "ShoppingCart", new AjaxOptions
+                        {
+                            UpdateTargetId = "shopingCart",
+                            InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace,
+                            HttpMethod = "Post"
+                        }))
+                    {
+                        <input type="hidden" name="count" value="1" />
+                        <input type="hidden" name="productId" value="@item.ExternalId" />
+                        <input type="submit" value="В корзину"/>
+                    }
+                </td>
+            @:</tr>
+        }
+
+    </table>
+</div>

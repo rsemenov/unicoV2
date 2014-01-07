@@ -1,6 +1,6 @@
 ﻿@model Unico.Models.ShoppingCartWidgetModel
 
-<div id="shopingCart">
+<div id="shopingCart" style="padding-top: 10px">
     @Html.ActionLink("Корзина ("+Model.Count+")", "Index", "ShoppingCart", routeValues: null, htmlAttributes: new { id = "cartLink" })
     @Html.ActionLink("Мои заказы", "Index", "Orders")
 </div>

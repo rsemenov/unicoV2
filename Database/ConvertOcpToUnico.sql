@@ -52,3 +52,12 @@ drop table #carts
 drop table #temp
 
 select * from unico.dbo.Products p inner join unico.dbo.OcpProducts op on p.ProductId = op.ProductId
+
+Insert into unico.dbo.ProductCartrige
+  Select up.ProductId, opc.CartrigeId
+  From OCP.dbo.OcpProductCartrige opc
+  inner join OCP.dbo.OcpProduct op on opc.OcpProductId=op.OcpProductId
+  inner join OCP.dbo.Product p on p.OcpProduct = op.OcpProductId
+  inner join unico.dbo.Products up on p.ExternalId=up.ExternalId
+  Order by up.ProductId
+  

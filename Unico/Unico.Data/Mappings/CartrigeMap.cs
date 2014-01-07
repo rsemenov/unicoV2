@@ -20,6 +20,13 @@ namespace Unico.Data.Mappings
                 .Table("PrinterCartrige")
                 .ParentKeyColumn("CartrigeId")
                 .ChildKeyColumn("PrinterId");
+
+            HasManyToMany(x => x.Products)
+                .Cascade.All()
+                .Inverse()
+                .Table("ProductCartrige")
+                .ChildKeyColumn("ProductId")
+                .ParentKeyColumn("CartrigeId");
         }
     }
 }

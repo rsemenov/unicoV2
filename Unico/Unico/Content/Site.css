@@ -9,7 +9,7 @@
 
 h1, h2{
 	margin: 0;
-	padding: 0;	
+	padding: 5px;	
 	font-weight: 300;
 	color: black;
 }
@@ -69,7 +69,8 @@ a:hover {
 
 .logo-wrapper {
     float: left;
-    width: 600px;
+    width: 570px;
+    padding-left: 30px;
 }
 
 .functions-wrapper {
@@ -108,13 +109,13 @@ a:hover {
 }
 
 #logo h1 {
-	padding: 20px 0px 0px 0px;
+	padding: 10px 0px 0px 0px;
 	letter-spacing: -2px;
-	font-size: 50px;
+	font-size: 60px;
 }
 
 #logo p {
-	margin-top: -15px;
+	margin-top: -7px;
 	padding: 0px 0px 0px 5px;
 	font-size: 20px;
 	font-weight: 300;
@@ -658,7 +659,7 @@ padding-top: 1em;
 #login {
     display: block;
     font-size: 1em;
-    margin: 0 0 10px;
+    margin: 20px 0 0px;
     text-align: right;
 }
 

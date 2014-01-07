@@ -21,12 +21,19 @@ namespace Unico.Data.Mappings
             Map(x => x.Name);
             Map(x => x.Price);
             Map(x => x.ExternalId);
+            Map(x => x.Image);
             Map(x => x.Availability).CustomType<ProductAvailability>();
             Map(x => x.Cartridge).Nullable();
 
             References<Category>(x => x.Category, "CategoryId");
 
             References<Brand>(x => x.Brand, "Brand").Cascade.All();
+
+            HasManyToMany(x => x.Cartriges)
+                .Cascade.All()
+                .Table("ProductCartrige")
+                .ChildKeyColumn("CartrigeId")
+                .ParentKeyColumn("ProductId");
         }
     }
 }

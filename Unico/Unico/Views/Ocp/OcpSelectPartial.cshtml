@@ -1,0 +1,4 @@
+﻿@model Unico.Models.OcpSelectModel
+
+@Html.DropDownListFor(x => x.SelectedBrand,new SelectList(Model.Brands, "BrandId", "Name"),
+"Выберите Бренд", new {id="brandSelect", data_url=Url.Action("GetPrinters", "Ocp")})

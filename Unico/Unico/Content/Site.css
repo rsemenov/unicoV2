@@ -1,7 +1,7 @@
 ﻿body {
 	margin: 0;
 	padding: 0;
-	background: #E5E6DD;
+	background: #ffffff;
 	font-family: 'Oxygen', sans-serif;
 	font-size: 13px;
 	color: #8A8985;
@@ -50,7 +50,7 @@ a:hover {
 
 #wrapper {
 	overflow: visible;
-	background: #F1F2E9;
+	background: #ffffff;
 }
 
 .container {

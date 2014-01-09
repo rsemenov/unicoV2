@@ -4,7 +4,7 @@
 	background: #ffffff;
 	font-family: 'Oxygen', sans-serif;
 	font-size: 13px;
-	color: #8A8985;
+	color: #D1D1D1;
 }
 
 h1, h2{
@@ -40,7 +40,7 @@ ul, ol {
 
 a {
 	text-decoration: none;
-	color: #a2b837;
+	color: #060266;
     font-weight: bold;
 }
 
@@ -69,13 +69,13 @@ a:hover {
 
 .logo-wrapper {
     float: left;
-    width: 570px;
+    width: 670px;
     padding-left: 30px;
 }
 
 .functions-wrapper {
     float: left;
-    width: 600px;
+    width: 500px;
 }
 
 #header {
@@ -101,7 +101,7 @@ a:hover {
 
 #logo {
 	overflow: hidden;
-	height: 120px;
+	height: 130px;
 }
 
 #logo h1, #logo p {
@@ -114,12 +114,16 @@ a:hover {
 	font-size: 60px;
 }
 
+#logo img {
+    margin-top:8px;
+}
+
 #logo p {
-	margin-top: -7px;
-	padding: 0px 0px 0px 5px;
+	margin-top: -40px;
+	padding-left: 170px;
 	font-size: 20px;
 	font-weight: 300;
-	color: #696969;
+	color: #000000;
 }
 
 #logo p a {
@@ -376,8 +380,8 @@ a:hover {
 #footer-bg {
 	overflow: hidden;
 	padding: 5px 0px;
-	background: #3C342E;
-	border-top: 10px solid #E5E6DD;
+	background: #010336;
+	border-top: 10px solid #FFFFFF;
 }
 
 #footer-content {
@@ -386,7 +390,7 @@ a:hover {
 #footer-content h2 {
 	margin: 0px 0px 20px 0px;
 	padding: 0px 0px 10px 0px;
-	border-bottom: 2px solid rgb(162, 184, 55);
+	border-bottom: 2px solid #577df7;
 	font-size: 22px;
 	color: #FFFFFF;
 }
@@ -421,7 +425,7 @@ a:hover {
 	line-height: normal;
 	text-align: center;
 	text-shadow: 1px 1px 0px #FFFFFF;
-	color: #909090;
+	color: #ffffff;
 }
 
 #footer a {
@@ -563,7 +567,7 @@ a:hover {
 	overflow: visible;
 	height: 42px;
 	margin-bottom: 1em;
-	background: #3C342E;	
+	background: #010458;	
 }
 
 .horizontalcssmenu ul{
@@ -628,13 +632,13 @@ border-width: 0 1px 1px 1px;
 }
 
 .horizontalcssmenu ul li a:hover{
-	background: rgb(162, 184, 55);
+	background: #577df7;
 	text-decoration: none;
 	color: #FFFFFF;
 }
 
 .horizontalcssmenu ul li ul li a:hover{
-	background: rgb(162, 184, 55);
+	background: #577df7;
 	text-decoration: none;
 	color: #FFFFFF;
 }

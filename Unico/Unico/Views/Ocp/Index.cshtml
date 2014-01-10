@@ -1,26 +1,30 @@
 ﻿@model Unico.Models.OcpSelectModel
 
 @{
-    ViewBag.Title = "OCP чернила";
+    ViewBag.Title = "Подбор OCP чернил";
 }
 
-<h1>OCP чернила</h1>
+<h1>Подбор OCP чернил</h1>
 <br/>
 <table>
     <tr>
-        <td valign="top">
+        <td valign="top" style="width:220px">
             @Html.Label("Бренд", new{style="font-size:1.2em"}) <br/>
             @Html.DropDownListFor(x => x.SelectedBrand,new SelectList(Model.Brands, "BrandId", "Name"),
                  "Выберите Бренд", new {id="brandSelect", data_url=Url.Action("GetPrinters", "Ocp")})
 
-            <div id="printerdiv" hidden>
+            <div id="printerdiv">
                 @Html.Label("Принтер", new{style="font-size:1.2em"})<br/>
-                <select id="printerSelect"></select>
+                <select id="printerSelect" disabled>
+                    <option value="">Выберите принтер</option>
+                </select>
             </div>
 
-            <div id="cartrigediv" hidden>
+            <div id="cartrigediv">
                 @Html.Label("Картридж", new{style="font-size:1.2em"}) <br/>
-                <select id="cartrigeSelect"></select>
+                <select id="cartrigeSelect" disabled>
+                    <option value="">Выберите картридж</option>
+                </select>
             </div>
         </td>
         <td>
@@ -39,7 +43,7 @@
                     printersOptions += "<option value='" + data[i].PrinterId + "'>" + data[i].Name + "</option>";
                 }
                 $("#printerSelect").find('option').remove().end().append($(printersOptions));
-                $("#printerdiv").removeAttr('hidden');
+                $("#printerSelect").removeAttr('disabled');
             });
     });
 </script>
@@ -49,12 +53,12 @@
         var selectedValue = $(this).val();
         $.post('@Url.Action("GetCartriges", "Ocp")', { selectedPrinter: selectedValue },
             function (data) {
-                var printersOptions = "<option value=\"\">Выберите картридж</option> ";
+                var printersOptions = "<option value=\"\">Выберите картридж</option>";
                 for (var i = 0; i < data.length; i++) {
                     printersOptions += "<option value='" + data[i].CartrigeId + "'>" + data[i].Name + "</option>";
                 }
                 $("#cartrigeSelect").find('option').remove().end().append($(printersOptions));
-                $("#cartrigediv").removeAttr('hidden');
+                $("#cartrigeSelect").removeAttr('disabled');
             });
     });
 </script>

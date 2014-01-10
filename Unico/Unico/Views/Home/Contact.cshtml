@@ -3,48 +3,58 @@
 }
 
 <hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>@ViewBag.Message</h2>
 </hgroup>
+
+@section Scripts {
+    @Scripts.Render("https://maps.googleapis.com/maps/api/js?sensor=false")
+    <script>
+      function initialize() {
+        var map_canvas = document.getElementById('map_canvas');
+        var map_options = {
+            center: new google.maps.LatLng(50.911659, 34.793088),
+            zoom: 17,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(map_canvas, map_options)
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+}
+
+<table>
+    <tr>
+        <td valign="top">
+     <section class="contact">
+    <header>
+        <h3>Адрес</h3>
+    </header>
+    <p>
+        г. Сумы, ул. Шевченко 5
+    </p>
+</section>
 
 <section class="contact">
     <header>
         <h3>Телефон</h3>
     </header>
-    <p>
-        <span class="label">Основной:</span>
-        <span>425.555.0100</span>
-    </p>
-    <p>
-        <span class="label">Нерабочее время:</span>
-        <span>425.555.0199</span>
-    </p>
+    <p>(0542) 79-38-15<br />
+        (067) 230-78-36</p>
 </section>
 
 <section class="contact">
     <header>
         <h3>Адрес электронной почты</h3>
-    </header>
+    </header>    
     <p>
-        <span class="label">Поддержка:</span>
-        <span><a href="mailto:Support@example.com">Support@example.com</a></span>
-    </p>
-    <p>
-        <span class="label">Маркетинг:</span>
-        <span><a href="mailto:Marketing@example.com">Marketing@example.com</a></span>
-    </p>
-    <p>
-        <span class="label">Общие вопросы:</span>
-        <span><a href="mailto:General@example.com">General@example.com</a></span>
+        <span>unico1203@ukr.net</span>
     </p>
 </section>
+        </td>
 
-<section class="contact">
-    <header>
-        <h3>Адрес</h3>
-    </header>
-    <p>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399
-    </p>
-</section>
+        <td>
+            <div id="map_canvas"></div>
+        </td>
+    </tr>
+</table>
+
+

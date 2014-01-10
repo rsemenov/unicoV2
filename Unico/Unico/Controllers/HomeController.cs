@@ -27,7 +27,6 @@ namespace Unico.Controllers
             return PartialView(departments);
         }
 
-        [Authorize]
         public ActionResult About()
         {
             ViewBag.Message = "Страница описания приложения.";

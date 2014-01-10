@@ -1,17 +1,30 @@
 ﻿@{
-    ViewBag.Title = "Домашняя страница Руарт";
+    ViewBag.Title = "Главная";
 }
+
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
-                <img src="http://www.ocp.de/images/stories/header/header_home_001.jpg"/>
+            <table style="width:1200px">
+                <tr>
+                    <td valign="top" style="width:1000px">
+                        <hgroup class="title">
+                            <h1>@ViewBag.Title</h1>
+                        </hgroup>
+                        <p>
+                            текст здесь
+                        </p>
+                    </td>
+                    <td>
+                        <img src="~/Content/images/cmy_inks.jpg"/>
+
+                    </td>
+                </tr>
+            </table>
             
-            <hgroup class="title">
-                <h1>@ViewBag.Title</h1>
-            </hgroup>
-            <p>
-                текст здесь
-            </p>
+            
+
+            
         </div>
     </section>
 }

@@ -799,3 +799,10 @@ button:hover {
         margin-right: 4px;
     }
 
+#map_canvas {
+        width: 500px;
+        height: 400px;
+        margin-left: 30px;
+      }
+
+

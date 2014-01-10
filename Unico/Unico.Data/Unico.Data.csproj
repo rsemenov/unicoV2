@@ -73,6 +73,7 @@
     <Compile Include="Mappings\CartrigeMap.cs" />
     <Compile Include="Mappings\OcpProductMap.cs" />
     <Compile Include="Mappings\PrinterMap.cs" />
+    <Compile Include="Mappings\SenderEmailMap.cs" />
     <Compile Include="RepositoryExtensions\AccountProfileRepositoryExtensions.cs" />
     <Compile Include="Enum\AccountRole.cs" />
     <Compile Include="Enum\FilterType.cs" />

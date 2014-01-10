@@ -665,6 +665,7 @@ padding-top: 1em;
     font-size: 1em;
     margin: 20px 0 0px;
     text-align: right;
+    color: #000000;
 }
 
     #login a {
@@ -703,11 +704,11 @@ padding-top: 1em;
 #category-table tr th{
     padding: 5px;
     border: 1px solid black;
-    background-color: #8A8985;
+    background-color: #eeeeee;
 }
 
 .category-table-row-odd {
-    background-color: #bbbab7
+    background-color: #eeeeee
 }
 
 #category-table tr td{

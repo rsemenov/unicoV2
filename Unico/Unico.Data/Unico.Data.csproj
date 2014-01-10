@@ -68,6 +68,7 @@
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Brand.cs" />
     <Compile Include="Entities\ProductOrder.cs" />
+    <Compile Include="Entities\SenderEmail.cs" />
     <Compile Include="Entities\Transaction.cs" />
     <Compile Include="Mappings\CartrigeMap.cs" />
     <Compile Include="Mappings\OcpProductMap.cs" />

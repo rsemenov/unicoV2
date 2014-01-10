@@ -53,20 +53,22 @@
         var selectedValue = $(this).val();
         $.post('@Url.Action("GetCartriges", "Ocp")', { selectedPrinter: selectedValue },
             function (data) {
-                var printersOptions = "<option value=\"\">Выберите картридж</option>";
+                var printersOptions = "<option value=\"-1\">Все картриджи</option>";
                 for (var i = 0; i < data.length; i++) {
                     printersOptions += "<option value='" + data[i].CartrigeId + "'>" + data[i].Name + "</option>";
                 }
                 $("#cartrigeSelect").find('option').remove().end().append($(printersOptions));
                 $("#cartrigeSelect").removeAttr('disabled');
             });
+        $("#ocpTable").load('@Url.Action("OcpProducts", "Ocp")' + '?selectedPrinter=' + selectedValue + '&selectedCartrige=-1')
     });
 </script>
 
 <script type="text/javascript">
     $('#cartrigeSelect').change(function () {
         var selectedValue = $(this).val();
-        $("#ocpTable").load('@Url.Action("OcpProducts", "Ocp")' + '?selectedCartrige=' + selectedValue)
+        var selectedPrinter = $('#printerSelect').val();
+        $("#ocpTable").load('@Url.Action("OcpProducts", "Ocp")' + '?selectedCartrige=' + selectedValue + '&selectedPrinter=' + selectedPrinter)
     });
 </script>
 

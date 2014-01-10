@@ -62,22 +62,50 @@ namespace Unico.Controllers
             return json;
         }
 
-        public PartialViewResult OcpProducts(int selectedCartrige)
+        public PartialViewResult OcpProducts(int selectedPrinter, int selectedCartrige)
         {
-            var cart = CartrigesRepository.Find(b => b.CartrigeId == selectedCartrige);
             var ocpProducts = new List<OcpProductModel>();
-            if (cart.Products != null)
+
+            if (selectedCartrige == -1)
             {
-                foreach (var p in cart.Products)
+                var printer = PrintersRepository.Find(b => b.PrinterId == selectedPrinter);
+
+                if (printer != null && printer.Cartriges != null)
                 {
-                    var ocp = OcpProductsRepository.Find(pr => pr.ExternalId == p.ExternalId);
-                    if (ocp != null)
+                    foreach (var cartrige in printer.Cartriges)
                     {
-                        ocpProducts.Add(Mapper.Map<OcpProductModel>(ocp));
+                        var cart = CartrigesRepository.Find(b => b.CartrigeId == cartrige.CartrigeId);
+                        if (cart.Products != null)
+                        {
+                            foreach (var p in cart.Products)
+                            {
+                                var ocp = OcpProductsRepository.Find(pr => pr.ExternalId == p.ExternalId);
+                                if (ocp != null && ocpProducts.All(pr => pr.ExternalId != ocp.ExternalId))
+                                {
+                                    ocpProducts.Add(Mapper.Map<OcpProductModel>(ocp));
+                                }
+                            }
+                        }
                     }
                 }
             }
+            else
+            {
+                var cart = CartrigesRepository.Find(b => b.CartrigeId == selectedCartrige);
+                if (cart!=null & cart.Products != null)
+                {
+                    foreach (var p in cart.Products)
+                    {
+                        var ocp = OcpProductsRepository.Find(pr => pr.ExternalId == p.ExternalId);
+                        if (ocp != null)
+                        {
+                            ocpProducts.Add(Mapper.Map<OcpProductModel>(ocp));
+                        }
+                    }
+                }
+            }
+
             return PartialView("OcpProducts", ocpProducts);
-        }
+        }       
     }
 }

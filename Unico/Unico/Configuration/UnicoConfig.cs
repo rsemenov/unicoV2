@@ -19,6 +19,7 @@ using Unico.Modules.RequestFilters;
 using AutoMapper;
 using Unico.Data.Entities;
 using Unico.Models;
+using Unico.Email;
 
 namespace Unico.Configuration
 {
@@ -36,6 +37,8 @@ namespace Unico.Configuration
             builder.Register(x => x.Resolve<ISessionFactory>().OpenSession()).InstancePerHttpRequest();
 
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).PropertiesAutowired();
+            builder.RegisterType(typeof(EmailGenerator)).As(typeof(IEmailGenerator)).PropertiesAutowired();
+            builder.RegisterType(typeof(EmailSender)).As(typeof(IEmailSender)).PropertiesAutowired();
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
 

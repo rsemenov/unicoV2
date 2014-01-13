@@ -13,5 +13,11 @@ namespace Unico.Data.Enum
         User = 1,
         Client = 2,
         Administrator = 3
-    }    
+    }
+
+    public enum EmailTypeEnum
+    {
+        OrderConfirmation = 1,
+        NewOrderCreated = 2,
+    }
 }

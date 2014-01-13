@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Unico.Data.Entities;
 using Unico.Data.Enum;
 using Unico.Data.Interfaces;
+using Unico.Email;
 using Unico.Helpers;
 using Unico.Infrastructure;
 using Unico.Models;
@@ -20,6 +21,7 @@ namespace Unico.Controllers
         public IRepository<Order> OrdersRepository { get; set; }
         public IRepository<ProductOrder> ProductOrderRepository { get; set; }
         public IRepository<Product> ProductsRepository { get; set; }
+        public IEmailSender EmailSender { get; set; }
 
         //
         // GET: /Orders/
@@ -48,6 +50,8 @@ namespace Unico.Controllers
             var cartItems = CartItemsRepository.FindAll(c => c.OrderId == orderId).ToList();
             if (cartItems.Count > 0)
             {
+                Session.NewShoppingCardId();
+
                 OrdersRepository.SaveOrUpdateAll(new Order()
                 {
                         AccountId = userData.AccountId,
@@ -73,9 +77,11 @@ namespace Unico.Controllers
                             });
                     }
                 }
-                
-                Session.NewShoppingCardId();
 
+                var orderModel = GenerateOrderModel(orderId, userData);
+                EmailSender.Send(userData.AccountId, EmailTypeEnum.OrderConfirmation, orderModel);
+                EmailSender.SendInternal(userData.AccountId, EmailTypeEnum.NewOrderCreated, orderModel);
+                
                 return RedirectToAction("Index", userData);
             }
 
@@ -84,28 +90,40 @@ namespace Unico.Controllers
 
         public ActionResult Details(Guid? orderId, UserData userData)
         {
-            var order = OrdersRepository.Find(ord => ord.AccountId == userData.AccountId && ord.ExternalId == orderId);
-            if (order == null)
+            var orderModel = GenerateOrderModel(orderId, userData);
+            if (orderModel == null)
             {
                 return RedirectToAction("Index", userData);
             }
+            return View(orderModel);
+        }
+
+        private OrderModel GenerateOrderModel(Guid? orderId, UserData userData)
+        {
+            var order = OrdersRepository.Find(ord => ord.AccountId == userData.AccountId && ord.ExternalId == orderId);
+
+            if (order == null)
+            {
+                return null;
+            }
+
             var orderModel = Mapper.Map<OrderModel>(order);
 
             var orderItems = ProductOrderRepository.FindAll(item => item.OrderId == orderId).ToList()
                 .Select(item =>
+                {
+                    var model = Mapper.Map<OrderItemModel>(item);
+                    var prod = ProductsRepository.Find(p => p.ExternalId == item.ProductId);
+                    if (prod != null)
                     {
-                        var model = Mapper.Map<OrderItemModel>(item);
-                        var prod = ProductsRepository.Find(p => p.ExternalId == item.ProductId);
-                        if (prod != null)
-                        {
-                            model.ProductName = prod.Name;
-                            model.ProductDetails = prod.Description;
-                        }
-                        return model;
-                    }).ToList();
+                        model.ProductName = prod.Name;
+                        model.ProductDetails = prod.Description;
+                    }
+                    return model;
+                }).ToList();
 
             orderModel.Items = orderItems;
-            return View(orderModel);
+            return orderModel;
         }
         
     }

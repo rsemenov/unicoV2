@@ -211,10 +211,6 @@
     <Compile Include="Infrastructure\HttpResponseBaseExtensions.cs" />
     <Compile Include="Infrastructure\SessionFacade.cs" />
     <Compile Include="Infrastructure\UserDataModelBinder.cs" />
-    <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\OcpSelectModel.cs" />
-    <Compile Include="Models\OrderModel.cs" />
-    <Compile Include="Models\ShoppingCartModel.cs" />
     <Compile Include="Modules\RequestFilters\IRequestFilter.cs" />
     <Compile Include="Modules\NHibernateSessionModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -362,6 +358,10 @@
     <ProjectReference Include="..\Unico.Data\Unico.Data.csproj">
       <Project>{54e0e58f-e8d3-4098-919e-a086dd7b339b}</Project>
       <Name>Unico.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Unico.Email\Unico.Email.csproj">
+      <Project>{bfe7c157-be0d-4d85-aae0-203dcf2be163}</Project>
+      <Name>Unico.Email</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

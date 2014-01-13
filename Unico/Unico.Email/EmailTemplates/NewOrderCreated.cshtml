@@ -1,0 +1,54 @@
+﻿<!---Новый заказ в магазине OCP чернил--->
+@model Unico.Models.OrderModel
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<body>
+    Принят новый заказ! Пожалуйста перезвоните.<br />
+    <table>
+        <tr>
+            <td>Номер заказа:</td>
+            <td>@Model.Number</td>
+        </tr>
+        <tr>
+            <td>Дата создания:</td>
+            <td>@Model.CreatedOn</td>
+        </tr>
+        <tr>
+            <td>Статус</td>
+            <td>@Model.Status</td>
+        </tr>
+    </table>
+    <br />
+    <table>
+        @foreach (var item in Model.Items) {
+            <tr>
+                <td>
+                    <b>@item.ProductName</b>
+                </td>       
+                <td>
+                    @item.ProductDetails
+                </td>
+                <td>
+                    @item.Count шт.
+                </td>
+                <td>
+                    <b>@item.Amount грн</b>
+                </td>
+            </tr>
+        }
+
+    </table>
+    <table>
+        <tr>
+            <td>Всего:</td>
+            <td><b>@Model.Amount грн</b></td>
+        </tr>
+    </table>
+
+    <p>C уважением,<br />
+       Магазин OCP чернил<br />
+       +380672307836<br />
+       <a href="http://ocp.org.ua">ocp.org.ua</a><br />
+    </p>
+</body>
+</html>

@@ -262,7 +262,7 @@ namespace Unico.Controllers
             if (ModelState.IsValid)
             {
                 // Добавление нового пользователя в базу данных
-                using (UsersContext db = new UsersContext())
+                /*using (UsersContext db = new UsersContext())
                 {
                     UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Проверка наличия пользователя в базе данных
@@ -281,7 +281,7 @@ namespace Unico.Controllers
                     {
                         ModelState.AddModelError("UserName", "Имя пользователя уже существует. Введите другое имя пользователя.");
                     }
-                }
+                }*/
             }
 
             ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;

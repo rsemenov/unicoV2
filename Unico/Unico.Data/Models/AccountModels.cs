@@ -18,19 +18,8 @@ namespace Unico.Models
         public Guid AccountId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-    }
+    }    
 
-    public class UsersContext : DbContext
-    {
-        public UsersContext()
-            : base("UnicoDbConnection")
-        {
-        }
-
-        public DbSet<UserProfile> UserProfiles { get; set; }
-    }
-
-    [Table("UserProfile")]
     public class UserProfile
     {
         [Key]

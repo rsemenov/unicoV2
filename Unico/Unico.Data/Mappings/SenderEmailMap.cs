@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unico.Data.Entities;
+using Unico.Data.Enum;
 
 namespace Unico.Data.Mappings
 {
@@ -21,6 +22,7 @@ namespace Unico.Data.Mappings
             Map(x => x.Host);
             Map(x => x.Port);
             Map(x => x.EnableSsl);
+
         }
     }
 
@@ -34,8 +36,20 @@ namespace Unico.Data.Mappings
             Id(x => x.EmailId);
             Map(x => x.AccountId);
             Map(x => x.EmailContent);
-            Map(x => x.EmailTitle);
+            Map(x => x.EmailTitle).CustomType<Data.Enum.EmailTypeEnum>();
             Map(x => x.SendOn).ReadOnly();
+        }
+    }
+
+    public class EmailTypeMap : ClassMap<Data.Entities.EmailType>
+    {
+        public EmailTypeMap()
+        {
+            Table("EmailTypes");
+            Schema(DataConfiguration.SchemeName);
+
+            Id(x => x.EmailTypeId);
+            References<SenderEmail>(x => x.Sender, "SenderId").Cascade.All();
         }
     }
 }

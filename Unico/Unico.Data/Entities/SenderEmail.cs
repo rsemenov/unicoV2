@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unico.Data.Enum;
 using Unico.Data.Interfaces;
 
 namespace Unico.Data.Entities
@@ -22,7 +23,13 @@ namespace Unico.Data.Entities
         public virtual int EmailId { get; set; }
         public virtual Guid AccountId { get; set; }
         public virtual string EmailContent { get; set; }
-        public virtual int EmailTitle { get; set; }
+        public virtual EmailTypeEnum EmailTitle { get; set; }
         public virtual DateTime SendOn { get; set; }
+    }
+
+    public class EmailType : IEntity
+    {
+        public virtual int EmailTypeId { get; set; }
+        public virtual SenderEmail Sender { get; set; }
     }
 }

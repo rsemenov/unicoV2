@@ -6,40 +6,69 @@
 <hgroup class="title">
     <h3>Регистрация</h3>
 </hgroup>
-
+<br />
+<section id="loginForm">
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
+    @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>Форма регистрации</legend>
-        <table width="500">
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName) 
+                @Html.ValidationMessageFor(m => m.UserName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password) 
+                @Html.ValidationMessageFor(m => m.Password)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword)
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Phone)
+                +38 @Html.TextBoxFor(m => m.Phone, new { style="width:275px;" })
+                @Html.ValidationMessageFor(m => m.Phone)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Address)
+                @Html.TextBoxFor(m => m.Address)
+                @Html.ValidationMessageFor(m => m.Address)
+            </li>
+        </ol>
+        <br/>
+        <input type="submit" value="Продолжить" />
+    </fieldset>
+}
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<!--<table width="500">
             <tr>
                 <td>@Html.LabelFor(m => m.UserName)</td>
-                <td>@Html.TextBoxFor(m => m.UserName, new { style="width:200px;" })</td>
+                <td>@Html.TextBoxFor(m => m.UserName, new { style = "width:200px;" }) @Html.ValidationMessageFor(m => m.UserName)</td>
             </tr>
             <tr>
                 <td>@Html.LabelFor(m => m.Password)</td>
-                <td>@Html.PasswordFor(m => m.Password, new { style="width:200px;" })</td>
+                <td>@Html.PasswordFor(m => m.Password, new { style = "width:200px;" })</td>
             </tr>
             <tr>
                 <td>@Html.LabelFor(m => m.ConfirmPassword)</td>
-                <td>@Html.PasswordFor(m => m.ConfirmPassword, new { style="width:200px;" })</td>
+                <td>@Html.PasswordFor(m => m.ConfirmPassword, new { style = "width:200px;" })</td>
             </tr>
             <tr>
                 <td>@Html.LabelFor(m => m.Phone)</td>
-                <td>+38 @Html.TextBoxFor(m => m.Phone, new { style="width:175px;" })</td>
+                <td>+38 @Html.TextBoxFor(m => m.Phone, new { style = "width:175px;" })</td>
             </tr>
             <tr>
                 <td>@Html.LabelFor(m => m.Address)</td>
                 <td>@Html.TextBoxFor(m => m.Address, new { style="width:200px;" })</td>
             </tr>
-        </table>
-        <br/>
-        <input type="submit" value="Продолжить" />
-    </fieldset>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        </table>-->

@@ -21,6 +21,7 @@ namespace Unico.Controllers
         public IRepository<Order> OrdersRepository { get; set; }
         public IRepository<ProductOrder> ProductOrderRepository { get; set; }
         public IRepository<Product> ProductsRepository { get; set; }
+        public IRepository<AccountProfile> AccountProfileRepository { get; set; }
         public IEmailSender EmailSender { get; set; }
 
         //
@@ -66,7 +67,7 @@ namespace Unico.Controllers
                     if (product != null)
                     {
                         ProductOrderRepository.SaveOrUpdateAll(new ProductOrder()
-                            {
+                        {
                                 OrderId = orderId,
                                 ProductId = cartItem.ProductId,
                                 Count = cartItem.Count,
@@ -74,13 +75,16 @@ namespace Unico.Controllers
                                 LastStatusUpdate = DateTime.UtcNow,
                                 Status = OrderStatus.New,
                                 WorkType = WorkType.Sell //TODO! 
-                            });
+                        });
                     }
                 }
 
+                var acc = AccountProfileRepository.Find(a => a.ExternalId == userData.AccountId);
                 var orderModel = GenerateOrderModel(orderId, userData);
+                var orderModelEmail = new OrderEmailModel() { OrderModel = orderModel, UserEmail = acc.Email, UserPhone = acc.Phone };
+
                 EmailSender.Send(userData.AccountId, EmailTypeEnum.OrderConfirmation, orderModel);
-                EmailSender.SendInternal(userData.AccountId, EmailTypeEnum.NewOrderCreated, orderModel);
+                EmailSender.SendInternal(userData.AccountId, EmailTypeEnum.NewOrderCreated, orderModelEmail);
                 
                 return RedirectToAction("Index", userData);
             }
@@ -122,7 +126,7 @@ namespace Unico.Controllers
                     return model;
                 }).ToList();
 
-            orderModel.Items = orderItems;
+            orderModel.Items = orderItems;           
             return orderModel;
         }
         

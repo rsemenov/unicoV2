@@ -6,6 +6,13 @@ using Unico.Data.Enum;
 
 namespace Unico.Models
 {
+    public class OrderEmailModel
+    {
+        public string UserPhone { get; set; }
+        public string UserEmail { get; set; }
+        public OrderModel OrderModel { get; set; }
+    }
+
     public class OrderModel
     {
         public const string ACTIVE_ORDER = "Активный";

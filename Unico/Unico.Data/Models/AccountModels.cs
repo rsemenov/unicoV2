@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
+using Unico.Data;
 
 namespace Unico.Models
 {
@@ -58,11 +59,11 @@ namespace Unico.Models
 
     public class LoginModel
     {
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "RequiredErrorMessage")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "RequiredErrorMessage")]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
@@ -73,11 +74,11 @@ namespace Unico.Models
 
     public class RegisterModel
     {
-        [Required]
+        [Required(ErrorMessageResourceType=typeof(Resource), ErrorMessageResourceName = "RequiredErrorMessage")]
         [Display(Name = "Email")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "RequiredErrorMessage")]
         [StringLength(100, ErrorMessage = "Значение \"{0}\" должно содержать не менее {2} символов", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
@@ -88,7 +89,7 @@ namespace Unico.Models
         [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "RequiredErrorMessage")]
         [Display(Name = "Телефон")]
         [RegularExpression(@"\d{10}",ErrorMessage = "Телефон задан не верно")]
         public string Phone { get; set; }

@@ -1,5 +1,5 @@
 ﻿<!---Новый заказ в магазине OCP чернил--->
-@model Unico.Models.OrderModel
+@model Unico.Models.OrderEmailModel
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <body>
@@ -7,20 +7,29 @@
     <table>
         <tr>
             <td>Номер заказа:</td>
-            <td>@Model.Number</td>
+            <td>@Model.OrderModel.Number</td>
         </tr>
         <tr>
             <td>Дата создания:</td>
-            <td>@Model.CreatedOn</td>
+            <td>@Model.OrderModel.CreatedOn</td>
         </tr>
         <tr>
-            <td>Статус</td>
-            <td>@Model.Status</td>
+            <td>Статус:</td>
+            <td>@Model.OrderModel.Status</td>
+        </tr>
+        <tr>
+            <td>Телефон клиента:</td>
+            <td>@Model.UserPhone</td>
+        </tr>
+        <tr>
+            <td>Email клиента:</td>
+            <td>@Model.UserEmail</td>
         </tr>
     </table>
     <br />
     <table>
-        @foreach (var item in Model.Items) {
+        @foreach (var item in Model.OrderModel.Items)
+        {
             <tr>
                 <td>
                     <b>@item.ProductName</b>
@@ -41,7 +50,7 @@
     <table>
         <tr>
             <td>Всего:</td>
-            <td><b>@Model.Amount грн</b></td>
+            <td><b>@Model.OrderModel.Amount грн</b></td>
         </tr>
     </table>
 

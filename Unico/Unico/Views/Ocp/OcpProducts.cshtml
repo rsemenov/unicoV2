@@ -42,7 +42,7 @@
             }
             i++;
             <td>
-                    <img src="@Url.Content("http://ocp.com.ua"+item.Image.Replace("stmb","tmb") )" alt="@item.Name" />
+                    <img src="@Url.Content("~"+item.Image)" alt="@item.Name" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)

@@ -278,6 +278,7 @@
     <None Include="Properties\PublishProfiles\Unico_IIS.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="LICENSE.txt" />
+    <Content Include="Scripts\cookiestools.js" />
     <Content Include="Scripts\csshorizontalmenu.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -294,6 +295,7 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\ocpselect.js" />
+    <Content Include="Scripts\spin.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

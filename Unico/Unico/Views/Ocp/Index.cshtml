@@ -1,41 +1,82 @@
 ﻿@model Unico.Models.OcpSelectModel
 
 @{
-    ViewBag.Title = "Подбор OCP чернил";
+    ViewBag.Title = "Подбор чернил для струйных принтеров";
 }
 
-<h1>Подбор OCP чернил</h1>
+<h1>Подбор чернил для струйных принтеров</h1>
 <br/>
 <table>
     <tr>
-        <td valign="top" style="width:220px">
+        <td valign="top" style="width:250px">
             @Html.Label("Бренд", new{style="font-size:1.2em"}) <br/>
             @Html.DropDownListFor(x => x.SelectedBrand,new SelectList(Model.Brands, "BrandId", "Name"),
-                 "Выберите Бренд", new {id="brandSelect", data_url=Url.Action("GetPrinters", "Ocp")})
+                 "Выберите Бренд", new {id="brandSelect", style="width:240px"})
 
             <div id="printerdiv">
                 @Html.Label("Принтер", new{style="font-size:1.2em"})<br/>
-                <select id="printerSelect" disabled>
+                <select id="printerSelect" disabled style="width:240px">
                     <option value="">Выберите принтер</option>
                 </select>
             </div>
 
             <div id="cartrigediv">
                 @Html.Label("Картридж", new{style="font-size:1.2em"}) <br/>
-                <select id="cartrigeSelect" disabled>
+                <select id="cartrigeSelect" disabled style="width:240px">
                     <option value="">Выберите картридж</option>
                 </select>
             </div>
         </td>
-        <td>
-            <div id="ocpTable"></div>
+        <td valign="top">
+            <div id="ocpTable">
+            </div>
         </td>
     </tr>
 </table>
 
 <script type="text/javascript">
+    $(document).ready(function () {
+        var opts = {
+            lines: 12, // The number of lines to draw
+            length: 7, // The length of each line
+            width: 3, // The line thickness
+            radius: 10, // The radius of the inner circle
+            corners: 1, // Corner roundness (0..1)
+            rotate: 0, // The rotation offset
+            direction: 1, // 1: clockwise, -1: counterclockwise
+            color: '#000', // #rgb or #rrggbb or array of colors
+            speed: 1, // Rounds per second
+            trail: 60, // Afterglow percentage
+            shadow: false, // Whether to render a shadow
+            hwaccel: false, // Whether to use hardware acceleration
+            className: 'spinner', // The CSS class to assign to the spinner
+            zIndex: 2e9, // The z-index (defaults to 2000000000)
+            top: 'auto', // Top position relative to parent in px
+            left: 'auto' // Left position relative to parent in px
+        };
+
+        $("<div id=\"spinnerDiv\"/>").appendTo("#ocpTable");
+        var target = document.getElementById("spinnerDiv");
+        var spinner = new Spinner(opts).spin(target);
+               
+        var brand = readCookie("selected-brand");
+        if (brand) {
+            $("#brandSelect [value='" + brand + "']").attr("selected", "selected");
+            $("#brandSelect").trigger("change");
+        }
+        var printer = readCookie("selected-printer")
+        if (!printer)
+        {
+            $("#ocpTable").load('@Url.Action("FrequentOcpProducts", "Ocp")')
+        }
+    });
+</script>
+
+<script type="text/javascript">
     $('#brandSelect').change(function () {
         var selectedValue = $(this).val();
+        createCookie("selected-brand", selectedValue, 0.01);
+
         $.post('@Url.Action("GetPrinters", "Ocp")', { selectedBrand: selectedValue },
             function (data) {
                 var printersOptions = "<option value=\"\">Выберите принтер</option>";
@@ -44,6 +85,11 @@
                 }
                 $("#printerSelect").find('option').remove().end().append($(printersOptions));
                 $("#printerSelect").removeAttr('disabled');
+                var printer = readCookie("selected-printer");
+                if (printer) {
+                    $("#printerSelect [value='" + printer + "']").attr("selected", "selected");
+                    $("#printerSelect").trigger("change");
+                }
             });
     });
 </script>
@@ -51,6 +97,10 @@
 <script type="text/javascript">
     $('#printerSelect').change(function () {
         var selectedValue = $(this).val();
+        createCookie("selected-printer", selectedValue, 0.01);
+
+        var cartrige = readCookie("selected-cartrige");
+
         $.post('@Url.Action("GetCartriges", "Ocp")', { selectedPrinter: selectedValue },
             function (data) {
                 var printersOptions = "<option value=\"-1\">Все картриджи</option>";
@@ -59,14 +109,23 @@
                 }
                 $("#cartrigeSelect").find('option').remove().end().append($(printersOptions));
                 $("#cartrigeSelect").removeAttr('disabled');
+                
+                if (cartrige) {
+                    $("#cartrigeSelect [value='" + cartrige + "']").attr("selected", "selected");
+                    $("#cartrigeSelect").trigger("change");
+                }
             });
-        $("#ocpTable").load('@Url.Action("OcpProducts", "Ocp")' + '?selectedPrinter=' + selectedValue + '&selectedCartrige=-1')
+
+        if (!cartrige) {
+            $("#ocpTable").load('@Url.Action("OcpProducts", "Ocp")' + '?selectedPrinter=' + selectedValue + '&selectedCartrige=-1')
+        }
     });
 </script>
 
 <script type="text/javascript">
     $('#cartrigeSelect').change(function () {
         var selectedValue = $(this).val();
+        createCookie("selected-cartrige", selectedValue, 0.01);
         var selectedPrinter = $('#printerSelect').val();
         $("#ocpTable").load('@Url.Action("OcpProducts", "Ocp")' + '?selectedCartrige=' + selectedValue + '&selectedPrinter=' + selectedPrinter)
     });

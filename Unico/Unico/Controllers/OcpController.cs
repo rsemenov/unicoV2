@@ -23,9 +23,14 @@ namespace Unico.Controllers
         public ActionResult Index()
         {
             var brands = BrandsRepository.FindAll(b => b.Name != "OCP").ToList();
+
+           // var p = OcpProductsRepository.FindAll().ToArray();
+           // var products = p.Select(prod => Mapper.Map<OcpProductModel>(prod)).ToList();
+
             var model = new OcpSelectModel()
                 {
-                    Brands = brands
+                    Brands = brands,
+                    //OcpProducts = products
                 };
             return View(model);
         }
@@ -106,6 +111,13 @@ namespace Unico.Controllers
             }
 
             return PartialView("OcpProducts", ocpProducts);
-        }       
+        }
+
+        public PartialViewResult FrequentOcpProducts()
+        {
+            var p = OcpProductsRepository.FindAll().ToArray();
+            var products = p.Select(prod => Mapper.Map<OcpProductModel>(prod));
+            return PartialView("OcpProducts", products);
+        }
     }
 }

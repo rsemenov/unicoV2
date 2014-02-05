@@ -69,7 +69,7 @@ namespace Unico.Configuration
             Mapper.CreateMap<Order, OrderModel>();
             Mapper.CreateMap<ProductOrder, OrderItemModel>();
             Mapper.CreateMap<Product, ProductModel>();
-            Mapper.CreateMap<OcpProduct, OcpProductModel>();
+            Mapper.CreateMap<OcpProduct, OcpProductModel>(MemberList.Destination);
         }
     }
 }

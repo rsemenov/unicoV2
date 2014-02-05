@@ -10,12 +10,8 @@ namespace Unico.Models
     {
         public List<Brand> Brands { get; set; }
         public int SelectedBrand { get; set; }
-        public List<Printer> Printers { get; set; }
-        public Printer SelectedPrinter { get; set; }
-        public List<Cartrige> Cartriges { get; set; }
-        public Cartrige SelectedCartrige { get; set; }
 
-        public List<OcpProduct> OcpProducts { get; set; }
+        public List<OcpProductModel> OcpProducts { get; set; }
     }
 
     public class ProductModel
